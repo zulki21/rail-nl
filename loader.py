@@ -1,5 +1,4 @@
 from connection import Station
-from connection import Train
 
 import csv
 
@@ -17,7 +16,7 @@ def load_stations():
             
             stations[row[0]] = Station(row[0], row[1], row[2])
 
-    # Adds all connections to the class
+    # Adds all connections to the stations
     with open("ConnectiesHolland.csv") as file:
 
         reader = csv.reader(file)
@@ -29,7 +28,7 @@ def load_stations():
             station1.add_connection(row[1], row[2])
 
             station2 = stations[row[1]]
-            station2.add_connection(row[1], row[2])
+            station2.add_connection(row[0], row[2])
 
 
 
