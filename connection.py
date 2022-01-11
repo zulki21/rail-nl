@@ -6,23 +6,26 @@ class Station:
 
     Attributes
     ----------
-    city_name : str
+    _city_name : str
         a string to keep track of which city it is in
     connections : dict
         dictionary of connections containing station object as key and time to travel as value
-
+    _pos: tuple
+        contains x,y coordinates of station
     Methods
     -------
     add_connection(station)
         adds connection between other station object
     get_city()
         returns city name
-
+    get_position()
+        returns position of station
     """
 
-    def __init__(self, city_name):
-        self.city_name = city_name
+    def __init__(self, city_name, x_coord, y_coord):
+        self._city_name = city_name
         self.connections = {}
+        self._pos = (x_coord, y_coord)
 
     def add_connection(self, station, time):
         """
@@ -51,7 +54,9 @@ class Station:
     def get_connections(self):
         return self.connections
 
+    def get_position(self):
+        return self._pos
 
-class Traject:
+class Train:
     def __init__(self):
         self.stations = []
