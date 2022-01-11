@@ -22,9 +22,9 @@ class Station:
 
     def __init__(self, city_name):
         self.city_name = city_name
-        self.connections = []
+        self.connections = {}
 
-    def add_connection(self, station):
+    def add_connection(self, station, time):
         """
         add a connection between 2 stations
 
@@ -34,7 +34,7 @@ class Station:
             A station object
 
         """
-        self.connections.append(station)
+        self.connections[station] = time
 
     def get_city(self):
         """
@@ -46,6 +46,9 @@ class Station:
             city_name string
         """
         return self.city_name
+
+    def get_connections(self):
+        return self.connections
 
 
 class Traject:
