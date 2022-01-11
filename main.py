@@ -87,14 +87,24 @@ if __name__ == "__main__":
         for i in range(5):
             connections = list(current_station.get_connections().keys())
             next_station = random.choice(connections)
+            if train.get_time_route() + current_station.get_time(next_station) < 120:
 
-            train.add_station(next_station)
-            current_station = next_station
+                train.add_station(next_station)
+                current_station = next_station
 
     a = unique_total_connections(trains)
 
     min = total_time_trains(trains)
 
-    K = 10000 * (a / 28) - (len(trains) * 100 - min)
+    K = 10000 * (a / len(stations)) - (len(trains) * 100 - min)
 
+    
+
+    for train in trains:
+        station_list = train.get_route()
+        a = []
+        for station in station_list:
+            a.append(station.get_name())
+        print(a)
+        print("------------")
     print(K)
