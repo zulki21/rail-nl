@@ -9,7 +9,8 @@ class Station:
     _city_name : str
         a string to keep track of which city it is in
     connections : dict
-        dictionary of connections containing station object as key and time to travel as value
+        dictionary of connections containing station object as key
+        and time to travel as value
     _pos: tuple
         contains x,y coordinates of station
     Methods
@@ -57,6 +58,27 @@ class Station:
     def get_position(self):
         return self._pos
 
+    def has_connection(self, station):
+        if station in self.connections.keys():
+            return True
+        else:
+            return False
+
+    def get_time(self,station):
+        return self.connections[station]
+
 class Train:
-    def __init__(self):
-        self.stations = []
+    def __init__(self, starting_station):
+        self.route = [starting_station]
+        self.total_time = 0
+
+    def add_station(self, station):
+        if self.route[-1].has_connection(station):
+            self.total_time +=  self.get_time(station)
+            self.append(station)
+
+        else:
+            raise Exception('last station does not have a connection ')
+
+    def get_route(self):
+        return self.route
