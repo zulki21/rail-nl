@@ -26,13 +26,10 @@ def load_stations():
             
             station1 = stations[row[0]]
             station2 = stations[row[1]]
-            
+
             station1.add_connection(station2, row[2])
             station2.add_connection(station1, row[2])
 
 
+    return stations
 
-
-
-        
-load_stations()
