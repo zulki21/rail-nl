@@ -8,8 +8,8 @@ class Station:
     ----------
     city_name : str
         a string to keep track of which city it is in
-    connections : list
-        list of connections
+    connections : dict
+        dictionary of connections containing station object as key and time to travel as value
 
     Methods
     -------
@@ -32,7 +32,8 @@ class Station:
         ----------
         city : Station
             A station object
-
+        time : int
+            time to travel between 2 stations
         """
         self.connections[station] = time
 
