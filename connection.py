@@ -9,7 +9,8 @@ class Station:
     _city_name : str
         a string to keep track of which city it is in
     connections : dict
-        dictionary of connections containing station object as key and time to travel as value
+        dictionary of connections containing station object as key
+        and time to travel as value
     _pos: tuple
         contains x,y coordinates of station
     Methods
@@ -56,6 +57,7 @@ class Station:
 
     def get_position(self):
         return self._pos
+
 
 class Train:
     def __init__(self):
