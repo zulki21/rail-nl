@@ -58,7 +58,16 @@ class Station:
     def get_position(self):
         return self._pos
 
+    def has_connection(self, station):
+        if station in self.connections.keys():
+            return True
+        else:
+            return False
+
 
 class Train:
     def __init__(self):
         self.stations = []
+
+    def add_station(self, station):
+        if 
