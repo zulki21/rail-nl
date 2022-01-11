@@ -64,10 +64,13 @@ class Station:
         else:
             return False
 
-
 class Train:
-    def __init__(self):
-        self.stations = []
+    def __init__(self, starting_station):
+        self.stations = [starting_station]
 
     def add_station(self, station):
-        if 
+        if self.stations[-1].has_connection(station):
+            self.append(station)
+        else:
+            raise Exception('stations do not have a connection ')
+
