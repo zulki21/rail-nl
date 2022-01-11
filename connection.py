@@ -97,7 +97,7 @@ class Station:
         int
             time needed for travel
         """
-        return self.connections[station]
+        return int(self.connections[station])
 
 
 class Train:
@@ -148,8 +148,8 @@ class Train:
         """
 
         if self.route[-1].has_connection(station):
-            self.total_time += self.get_time(station)
-            self.append(station)
+            self.total_time += self.route[-1].get_time(station)
+            self.route.append(station)
         else:
             raise Exception("last station does not have a connection ")
 
@@ -164,7 +164,7 @@ class Train:
         """
         return self.route
 
-    def get_time(self):
+    def get_time_route(self):
         """
         returns the time it takes the train to finish the route
 
