@@ -64,13 +64,21 @@ class Station:
         else:
             return False
 
+    def get_time(self,station):
+        return self.connections[station]
+
 class Train:
     def __init__(self, starting_station):
-        self.stations = [starting_station]
+        self.route = [starting_station]
+        self.total_time = 0
 
     def add_station(self, station):
-        if self.stations[-1].has_connection(station):
+        if self.route[-1].has_connection(station):
+            self.total_time +=  self.get_time(station)
             self.append(station)
-        else:
-            raise Exception('stations do not have a connection ')
 
+        else:
+            raise Exception('last station does not have a connection ')
+
+    def get_route(self):
+        return self.route
