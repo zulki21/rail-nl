@@ -133,10 +133,8 @@ class Train:
         self.total_time = 0
 
     def add_station(self, station):
-        """Prints what the animals name is and what sound it makes.
-
-        If the argument `sound` isn't passed in, the default Animal
-        sound is used.
+        """
+        Adds station to the route and checking if station has connection
 
         Parameters
         ----------
@@ -152,7 +150,6 @@ class Train:
         if self.route[-1].has_connection(station):
             self.total_time += self.get_time(station)
             self.append(station)
-
         else:
             raise Exception("last station does not have a connection ")
 
