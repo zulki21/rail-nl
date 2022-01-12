@@ -1,42 +1,105 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import argparse
+import plotly.express as px
+# import plotly.graph_objects as go
+import geopandas as gpd
+# import folium
+# import warnings
+# from mpl_toolkits.basemap import Basemap
 
 
-def main(input_file, output_file):
+# def main(input_file, output_file):
 
-    df = pd.read_csv(input_file)
-    # print(df.head())
+df = pd.read_csv('StationsHolland.csv')
+# print(df.x)
 
-    boundingBox = (df.x.min(),   df.x.max(),
-                   df.y.min(), df.y.max())
+geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
 
-    # print(boundingBox)
+fig = px.scatter_mapbox(df, lat=df.x, lon=df.y, hover_name="station", hover_data=["x", "y"],
+                        color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+fig.update_layout(mapbox_style="carto-positron")
+fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+fig.show()
 
-    kaartVanNederland = plt.imread(
-        'Afbeeldingen/nederlandKaartZonderSteden.png')
+# file_path = 'Provinciegrenzen/B1_Provinciegrenzen_van_NederlandPolygon.shp'
+# gdf_prov = gpd.read_file(file_path)
 
-    fig, ax = plt.subplots(figsize=(8, 7))
+# my_map = Basemap(projection='merc', resolution='h', area_thresh=30,
+#                  llcrnrlon=map_boundaries.left,
+#                  llcrnrlat=map_boundaries.bottom,
+#                  urcrnrlon=map_boundaries.right,
+#                  urcrnrlat=map_boundaries.top)
 
-    ax.scatter(df.x, df.y, zorder=1, alpha=0.2, c='b', s=10)
-    ax.set_title('Plotting coordinates')
-    ax.set_xlim(boundingBox[0], boundingBox[1])
-    ax.set_ylim(boundingBox[2], boundingBox[3])
-    ax.imshow(kaartVanNederland, zorder=0, extent=boundingBox, aspect='equal')
+# # fill the map
+# my_map.drawcoastlines()
+# my_map.drawcountries()
+# my_map.fillcontinents(color='moccasin')
 
-    plt.savefig(output_file, format='png')
+# print(gdf_prov)
+# fig = plt.figure()
+# ax = fig.add_subplot(1, 1, 1)
+# fig, ax = plt.subplots(figsize=(8, 8))
+
+# gdf_prov.plot(ax=ax, facecolor='none', edgecolor='gray')
+
+# ax.scatter(list(map(lambda x: x * 10000, df.y)),
+#            list(map(lambda x: x * 10000, df.x)))  # TODO: dit gebruiken
+
+# print(gdf_prov.crs)
+
+# print(df.head())
+
+# print(boundingBox[3])
+
+# fig, ax = plt.subplots(figsize=(10, 5))
+
+# fig = px.scatter_geo(df.x, df.y)
+
+# plt.show()
+
+# fig.savefig(output_file, format='png')
+# fig.write_image(output_file)
+
+# fig = go.Figure(go.Scattermapbox(
+#     lat=[df.x], lon=[df.y], mode='markers'))
+
+# fig.show()
+
+# fig.show()
+# print(fig)
+
+# go.savefig(output_file, format='png')
+# fig.write_image(output_file)
+
+# fig = px.scatter_geo(df, lat=df.x, lon=df.y)
+# fig.update_layout(title='World map', title_x=0.5)
+# fig.show()
+
+# nld_lat = 52.2130
+# nld_lon = 5.2794
+
+# nld_coordinates = (nld_lat, nld_lon)
+
+# # Maak kaart van Nederland
+# map_nld = folium.Map(location=nld_coordinates,
+#                      tiles='cartodbpositron', zoom_start=7, control_scale=True)
+
+# Toon resultaat
+# print(map_nld)
+# plt.savefig(output_file, format='png')
 
 
-if __name__ == "__main__":
-    # Set-up parsing command line arguments
-    parser = argparse.ArgumentParser(description="plots a graph from the data")
+# if __name__ == "__main__":
+#     # Set-up parsing command line arguments
+#     parser = argparse.ArgumentParser(description="plots a graph from the data")
 
-    # Adding arguments
-    parser.add_argument("input", help="location of datafile")
-    parser.add_argument("output", help="location of output file")
+#     # Adding arguments
+#     parser.add_argument("input", help="location of datafile")
+#     parser.add_argument("output", help="location of output file")
 
-    # Read arguments from command line
-    args = parser.parse_args()
+#     # Read arguments from command line
+#     args = parser.parse_args()
 
-    # Run main with provide arguments
-    main(args.input, args.output)
+#     # Run main with provide arguments
+#     main(args.input, args.output)
