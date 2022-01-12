@@ -99,6 +99,9 @@ class Station:
         """
         return int(self.connections[station])
 
+    def get_name(self):
+        return self._city_name
+
 
 class Train:
     """
