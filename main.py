@@ -115,34 +115,48 @@ if __name__ == "__main__":
             lat.append(station.get_position()[0])
             lon.append(station.get_position()[1])
 
-            # print(station.get_position())
-
         lat = list(map(float, lat))
         lon = list(map(float, lon))
-        print(lat)
-        print(lon)
-        # print(position)
-        print(a)
-        print("------------")
+        # print(lat)
+        geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+
+        fig = px.scatter_mapbox(position, lat=lat, lon=lon, hover_name=a,
+                                color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+        fig.add_trace(go.Scattermapbox(
+            mode="lines",
+            lon=lon,
+            lat=lat,
+            marker={'size': 5},
+            showlegend=False))
+        fig.update_layout(mapbox_style="carto-positron")
+        fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+
+        fig.show()
+    # print(lon)
+    # print(position)
+    print(a)
+    print("------------")
     print(K)
 
     # for coordinate in position:
     #     print(coordinate)
 
     # pd.to_numeric(df_pos)
+    # print(lat)
 
-    geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+    # geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
 
-    fig = px.scatter_mapbox(position, lat=lat, lon=lon, hover_name=a,
-                            color_discrete_sequence=["fuchsia"], zoom=3, height=300)
-    fig.add_trace(go.Scattermapbox(
-        mode="lines",
-        lon=lon,
-        lat=lat,
-        marker={'size': 5}))
-    fig.update_layout(mapbox_style="carto-positron")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    # fig = px.scatter_mapbox(position, lat=lat, lon=lon, hover_name=a,
+    #                         color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+    # fig.add_trace(go.Scattermapbox(
+    #     mode="lines",
+    #     lon=lon,
+    #     lat=lat,
+    #     marker={'size': 5},
+    #     showlegend=False))
+    # fig.update_layout(mapbox_style="carto-positron")
+    # fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
 
-    fig.show()
+    # fig.show()
 
     # df_pos = pd.DataFrame(position, columns=list('xy'))
