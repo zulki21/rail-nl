@@ -103,60 +103,49 @@ if __name__ == "__main__":
 
     K = 10000 * (a / len(stations)) - (len(trains) * 100 - min)
 
+    lats = []
+    lons = []
+    positions = []
+    b = []
+    traces_lat = []
+    traces_lon = []
+    station_traces = []
+
     for train in trains:
         station_list = train.get_route()
-        a = []
-        position = []
         lat = []
         lon = []
+        stations = []
         for station in station_list:
-            a.append(station.get_name())
-            position.append(station.get_position())
-            lat.append(station.get_position()[0])
-            lon.append(station.get_position()[1])
+            b.append(station.get_name())
+            stations.append(station.get_name())
+            positions.append(station.get_position())
+            lat.append(float(station.get_position()[0]))
+            lon.append(float(station.get_position()[1]))
+            lats.append(float(station.get_position()[0]))
+            lons.append(float(station.get_position()[1]))
+        traces_lat.append(lat)
+        traces_lon.append(lon)
+        station_traces.append(stations)
 
-        lat = list(map(float, lat))
-        lon = list(map(float, lon))
-        # print(lat)
-        geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+    geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
 
-        fig = px.scatter_mapbox(position, lat=lat, lon=lon, hover_name=a,
-                                color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+    fig = px.scatter_mapbox(positions, lat=lats, lon=lons, hover_name=b,
+                            color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+
+    for i in range(len(trains)):
         fig.add_trace(go.Scattermapbox(
             mode="lines",
-            lon=lon,
-            lat=lat,
+            lon=traces_lon[i],
+            lat=traces_lat[i],
             marker={'size': 5},
-            showlegend=False))
-        fig.update_layout(mapbox_style="carto-positron")
-        fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+            hoverinfo='skip'
+        ))
 
-        fig.show()
-    # print(lon)
-    # print(position)
-    print(a)
+    fig.update_layout(mapbox_style="carto-positron")
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.show()
+
+    print(station_traces)
     print("------------")
     print(K)
-
-    # for coordinate in position:
-    #     print(coordinate)
-
-    # pd.to_numeric(df_pos)
-    # print(lat)
-
-    # geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
-
-    # fig = px.scatter_mapbox(position, lat=lat, lon=lon, hover_name=a,
-    #                         color_discrete_sequence=["fuchsia"], zoom=3, height=300)
-    # fig.add_trace(go.Scattermapbox(
-    #     mode="lines",
-    #     lon=lon,
-    #     lat=lat,
-    #     marker={'size': 5},
-    #     showlegend=False))
-    # fig.update_layout(mapbox_style="carto-positron")
-    # fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
-
-    # fig.show()
-
-    # df_pos = pd.DataFrame(position, columns=list('xy'))
