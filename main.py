@@ -4,9 +4,8 @@ import random
 import plotly.express as px
 import plotly.graph_objects as go
 import geopandas as gpd
-import pandas as pd
 import csv
-from pandas.core.frame import DataFrame
+from visualize import get_route, get_all_routes
 
 
 def unique_connection_train(train):
@@ -104,73 +103,28 @@ if __name__ == "__main__":
 
     K = 10000 * (a / len(stations)) - (len(trains) * 100 - min)
 
-    lats = []
-    lons = []
-    positions = []
-    b = []
-    traces_lat = []
-    traces_lon = []
-    station_traces = []
+    get_route(trains)
+    get_all_routes(trains)
+
+print("------------")
+print(K)
+
+with open('output_file', 'w') as f:
+
+    writer = csv.writer(f)
+
+    headers = ["trains", "stations"]
+    writer.writerow(headers)
 
     for train in trains:
-        station_list = train.get_route()
-        lat = []
-        lon = []
-        stations = []
-        for station in station_list:
-            b.append(station.get_name())
-            stations.append(station.get_name())
-            positions.append(station.get_position())
-            lat.append(float(station.get_position()[0]))
-            lon.append(float(station.get_position()[1]))
-            lats.append(float(station.get_position()[0]))
-            lons.append(float(station.get_position()[1]))
-        traces_lat.append(lat)
-        traces_lon.append(lon)
-        station_traces.append(stations)
 
-    geo_df = gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
+        route = []
 
-    fig = px.scatter_mapbox(positions, lat=lats, lon=lons, hover_name=b,
-                            color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+        for i in range(len(train.get_route())):
 
-    for i in range(len(trains)):
-        fig.add_trace(go.Scattermapbox(
-            mode="lines",
-            lon=traces_lon[i],
-            lat=traces_lat[i],
-            marker={'size': 5},
-            hoverinfo='skip'
+            route.append(train.get_route()[i]._city_name)
 
-        ))
+        writer.writerow(route)
 
-    fig.update_layout(mapbox_style="carto-positron", autosize=True)
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0,
-                      "b": 0}, width=1500, height=700, mapbox={
-        'center': {'lon': 4.900277615, 'lat': 52.37888718}})
-
-    fig.show()
-
-    print(station_traces)
-    print("------------")
-    print(K)
-
-    with open('output_file', 'w') as f:
-
-        writer = csv.writer(f)
-
-        headers = ["trains", "stations"]
-        writer.writerow(headers)
-
-        for train in trains:
-
-            route = []
-
-            for i in range(len(train.get_route())):
-
-                route.append(train.get_route()[i]._city_name)
-
-            writer.writerow(route)
-
-        score = ["SCORE = ", K]
-        writer.writerow(score)
+    score = ["SCORE = ", K]
+    writer.writerow(score)
