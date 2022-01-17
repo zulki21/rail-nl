@@ -1,11 +1,8 @@
 from loader import load_stations
 from connection import Train
 import random
-import plotly.express as px
-import plotly.graph_objects as go
-import geopandas as gpd
 import csv
-from visualize import get_route, get_all_routes
+from visualize import *
 
 
 def unique_connection_train(train):
