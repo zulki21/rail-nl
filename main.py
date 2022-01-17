@@ -101,7 +101,8 @@ if __name__ == "__main__":
     K = 10000 * (a / len(stations)) - (len(trains) * 100 - min)
 
     get_route(trains)
-    get_all_routes(trains)
+    get_all_stations(stations)
+    visualize_all_routes(trains, stations)
 
 print("------------")
 print(K)

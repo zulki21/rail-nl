@@ -31,13 +31,32 @@ def get_route(trains):
     return lat, lon, lats, lons, positions, b, traces_lat, traces_lon
 
 
-def get_all_routes(trains):
+def get_all_stations(stations):
+    station_names = []
+    station_positions = []
+    station_lats = []
+    station_lons = []
+
+    for station_name, station_obj in stations.items():
+        station_names.append(station_name)
+        station_positions.append(station_obj.get_position())
+        station_lats.append(float(station_obj.get_position()[0]))
+        station_lons.append(float(station_obj.get_position()[1]))
+    return station_names, station_positions, station_lats, station_lons
+
+
+def visualize_all_routes(trains, stations):
     lat, lon, lats, lons, positions, b, traces_lat, traces_lon = get_route(
         trains)
+    station_names, station_positions, station_lats, station_lons = get_all_stations(
+        stations)
+
     gpd.read_file(gpd.datasets.get_path('naturalearth_cities'))
 
-    fig = px.scatter_mapbox(positions, lat=lats, lon=lons, hover_name=b,
-                            color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+    fig = px.scatter_mapbox(station_positions, lat=station_lats,
+                            lon=station_lons, hover_name=station_names)
+    px.scatter_mapbox(positions, lat=lats, lon=lons, hover_name=b,
+                      color_discrete_sequence=["fuchsia"], zoom=3, height=300)
     for i in range(len(trains)):
 
         fig = fig.add_trace(go.Scattermapbox(
