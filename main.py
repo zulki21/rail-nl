@@ -5,6 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 import geopandas as gpd
 import pandas as pd
+import csv
 from pandas.core.frame import DataFrame
 
 
@@ -153,3 +154,23 @@ if __name__ == "__main__":
     print(station_traces)
     print("------------")
     print(K)
+
+    with open('output_file', 'w') as f:
+
+        writer = csv.writer(f)
+
+        headers = ["trains", "stations"]
+        writer.writerow(headers)
+
+        for train in trains:
+
+            route = []
+
+            for i in range(len(train.get_route())):
+
+                route.append(train.get_route()[i]._city_name)
+
+            writer.writerow(route)
+
+        score = ["SCORE = ", K]
+        writer.writerow(score)
