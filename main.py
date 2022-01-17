@@ -140,10 +140,14 @@ if __name__ == "__main__":
             lat=traces_lat[i],
             marker={'size': 5},
             hoverinfo='skip'
+
         ))
 
-    fig.update_layout(mapbox_style="carto-positron")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(mapbox_style="carto-positron", autosize=True)
+    fig.update_layout(margin={"r": 0, "t": 0, "l": 0,
+                      "b": 0}, width=1500, height=700, mapbox={
+        'center': {'lon': 4.900277615, 'lat': 52.37888718}})
+
     fig.show()
 
     print(station_traces)
