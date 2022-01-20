@@ -178,6 +178,9 @@ class RandomAlgo:
         K = 10000 * (a / 28) - (len(self.trains) * 100 + min)
         return K
 
+    def get_trains(self):
+        return self.trains
+
 
 
 
