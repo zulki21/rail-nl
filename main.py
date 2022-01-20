@@ -104,6 +104,7 @@ if __name__ == "__main__":
     get_all_stations(stations)
     visualize_all_routes(trains, stations)
 
+
 print("------------")
 print(K)
 

@@ -56,7 +56,7 @@ def visualize_all_routes(trains, stations):
     fig = px.scatter_mapbox(station_positions, lat=station_lats,
                             lon=station_lons, hover_name=station_names)
     px.scatter_mapbox(positions, lat=lats, lon=lons, hover_name=b,
-                      color_discrete_sequence=["fuchsia"], zoom=3, height=300)
+                      color_discrete_sequence=["fuchsia"], height=300)
     for i in range(len(trains)):
 
         fig = fig.add_trace(go.Scattermapbox(
