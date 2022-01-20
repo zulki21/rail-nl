@@ -83,7 +83,8 @@ class RandomAlgo:
 
         for train in self.trains:
             current_station = train.get_route()[0]
-            while train.get_time_route() < 120:
+            random_num = random.randint(0, 120)
+            while train.get_time_route() < random_num:
                 connections = list(current_station.get_connections().keys())
                 next_station = random.choice(connections)
                 train.add_station(next_station)
