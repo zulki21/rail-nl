@@ -11,19 +11,22 @@ def plotBar():
     # plt.figure(figsize=(20, 10), dpi=80)
 
     # Adding data
-    height = a.barChart()
-    bars = list(map(str, list(range(len(height)))))
-    y_pos = np.arange(len(bars))
+    x_axis = a.barChart()
+    y_axis = list(map(str, list(range(len(x_axis)))))
+    y_pos = np.arange(len(y_axis))
 
     # Create bars
-    plt.barh(height, y_pos)
+    plt.barh(y_pos, x_axis)
 
     # N on the x-axis with a frequency of 25
-    plt.xticks(np.arange(0, len(bars)+1, 25))
+    plt.yticks(np.arange(0, len(y_axis)+1, 25))
+    # plt.xticks(np.arange(8000, len(x_axis)+1, 100))
+
+    plt.xlim([8000, 9000])
 
     # Labels for the graph
-    plt.xlabel("K-waarden")
-    plt.ylabel("N")
+    plt.xlabel("K-value")
+    plt.ylabel("Frequency")
 
     # plt.gca().invert_xaxis()
 
