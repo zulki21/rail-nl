@@ -8,24 +8,34 @@ from randomalgo import RandomAlgo
 
 
 if __name__ in '__main__':
+    stations = load_stations()
+
     a = AlgoRunner(500)
     print(list(a.max_K().keys())[0])
     best = list(a.max_K().keys())[0]
 
     trains = best.get_trains()
+
+    get_route(trains)
     c = []
+
     for train in trains:
-       
+
         b = []
+
         for station in train.get_route():
             b.append(station.get_name())
 
         c.append(b)
 
     i = 1
+
     for traject in c:
         print(f"trein{i} : {traject}")
-        i+= 1
+        i += 1
+
+    get_all_stations(stations)
+    visualize_all_routes(trains, stations)
 
 
 # with open('output_file', 'w') as f:

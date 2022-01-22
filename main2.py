@@ -3,27 +3,26 @@ from randomalgo import RandomAlgo
 from algorunner import AlgoRunner
 import matplotlib.pyplot as plt
 import numpy as np
+from tabulate import tabulate
 
 
-def plotBar():
-    plt.figure(figsize=(20, 10), dpi=80)
+def plotHist():
 
-    # Make a random dataset:
-    height = a.barChart()
-    bars = list(map(str, list(range(len(height)))))
-    y_pos = np.arange(len(bars))
+    # Plot histogram
+    plt.hist(a.barChart(), bins='auto')
 
-    # Create bars
-    plt.bar(y_pos, height, width=0.9)
+    # Labels for the histogram
+    plt.xlabel("K-values")
+    plt.ylabel("Frequency")
 
-    # Create names on the x-axis
-    plt.xticks(np.arange(0, len(bars)+1, 25))
+    # Save histogram as a png
+    plt.savefig('Histogram.png')
 
-    plt.gca().invert_yaxis()
 
-    # Show graphic
-    plt.show()
-    plt.savefig('barChart.png')
+def createTabel():
+    content = a.stats().items()
+    print(content)
+    print(tabulate(content, tablefmt="github"))
 
 
 if __name__ in '__main__':
@@ -31,5 +30,7 @@ if __name__ in '__main__':
 
     print(a.max_K())
     print(a.stats())
+    print(a.barChart())
 
-    plotBar()
+    plotHist()
+    createTabel()
