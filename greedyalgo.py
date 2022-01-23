@@ -15,8 +15,19 @@ class GreedyAlgo:
         while len(self.used_connections) != 28:
 
             # create starting station
+            current_train = Train(random.choice(list(self.stations.values())))
+            self.trains.append(current_train)
+            
+            while current_train.get_time_route() < 120:
 
-            # append train
+                current_station = current_train.get_route()[-1]
+
+                connections = current_station.connections
+
+                for connection in connections:
+                    
+
+
 
             # Chose which track is best for train (k value)
 
@@ -24,4 +35,6 @@ class GreedyAlgo:
 
             # repeat untill all tracks used
 
+
+a = GreedyAlgo()
 
