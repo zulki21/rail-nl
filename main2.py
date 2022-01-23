@@ -1,4 +1,5 @@
 from algorunner import AlgoRunner
+from greedyalgo import GreedyAlgo
 from randomalgo import RandomAlgo
 from algorunner import AlgoRunner
 import matplotlib.pyplot as plt
@@ -27,6 +28,9 @@ def createTabel():
 
 if __name__ in '__main__':
     a = AlgoRunner(100)
+    b = GreedyAlgo()
+
+    print(b.total_time_trains())
 
     print(a.max_K())
     print(a.stats())

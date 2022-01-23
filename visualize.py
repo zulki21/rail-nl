@@ -28,6 +28,7 @@ def get_route(trains):
         traces_lat.append(lat)
         traces_lon.append(lon)
         station_traces.append(stations)
+
     return lat, lon, lats, lons, positions, b, traces_lat, traces_lon
 
 
