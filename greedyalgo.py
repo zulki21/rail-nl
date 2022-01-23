@@ -1,4 +1,3 @@
-from tkinter import FALSE
 from loader import load_stations
 import random
 from connection import Train
@@ -32,11 +31,15 @@ class GreedyAlgo:
 
                 connections = current_station.connections
 
-                i = 0
                 best_k = 0
                 for connection in connections:
-                    if check_if_contains(self.used_connections, {current_station, connection}) == FALSE:
-                        k = get_k(len(self.trains), (len(self.used_connections) + 1), total_time_trains(self.trains) +  )
+
+                    if {current_station, connection} not in self.used_connections:
+                       k = get_k(len(self.trains), (len(self.used_connections) + 1), total_time_trains(self.trains) + connection.get_time(current_station))
+                    else:
+                        k = get_k(len(self.trains), (len(self.used_connections)), total_time_trains(self.trains) + connection.get_time(current_station))
+                    
+
 
 
 
