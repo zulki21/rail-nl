@@ -1,3 +1,4 @@
+from tabnanny import check
 from loader import load_stations
 import random
 from connection import Train
@@ -35,22 +36,19 @@ class GreedyAlgo:
                 for connection in connections:
 
                     if {current_station, connection} not in self.used_connections:
-                       k = get_k(len(self.trains), (len(self.used_connections) + 1), total_time_trains(self.trains) + connection.get_time(current_station))
+                        k = get_k(len(self.trains), (len(self.used_connections) + 1), total_time_trains(self.trains) + connection.get_time(current_station))
                     else:
                         k = get_k(len(self.trains), (len(self.used_connections)), total_time_trains(self.trains) + connection.get_time(current_station))
+
+                    if k > best_k:
+                        best_k = k
+                        next_station = connection
+
+                self.used_connections.append({current_station, next_station})
+                current_train.add_station(next_station)
+            print(len(self.used_connections))
+            print(get_k(len(self.trains), (len(self.used_connections)), total_time_trains(self.trains) + connection.get_time(current_station)))
                     
-
-
-
-
-
-
-
-            # Chose which track is best for train (k value)
-
-            # Let run for 120 min
-
-            # repeat untill all tracks used
 
 
 a = GreedyAlgo()
