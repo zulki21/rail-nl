@@ -49,11 +49,14 @@ class GreedyAlgo:
                         best_k = k
                         next_station = connection
 
-                self.used_connections.append({current_station, next_station})
+                if {current_station, next_station} not in self.used_connections:
+                    self.used_connections.append(
+                        {current_station, next_station})
                 current_train.add_station(next_station)
-            print(len(self.used_connections))
+            # print(len(self.used_connections))
             print(get_k(len(self.trains), (len(self.used_connections)), total_time_trains(
                 self.trains) + connection.get_time(current_station)))
+            # print(total_time_trains(self.trains))
 
 
 a = GreedyAlgo()
