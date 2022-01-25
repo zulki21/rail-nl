@@ -19,7 +19,7 @@ def randomHist():
     plt.title('Random Algorithm')
 
     # Save histogram as a png
-    plt.savefig('Histogram.svg')
+    plt.savefig('Histogram.png')
 
 
 def greedyHist():
@@ -32,7 +32,7 @@ def greedyHist():
     plt.title('Greedy Algorithm')
 
     # Save histogram as a png
-    plt.savefig('Histogram-Greedy.svg')
+    plt.savefig('Histogram-Greedy.png')
 
 
 def createTabelRandom():
