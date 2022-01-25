@@ -20,18 +20,37 @@ class GreedyAlgo:
         self.trains = []
         self.used_connections = []
 
-        while len(self.used_connections) != 28:
+        while len(self.used_connections) != 28 and len(self.trains) <= 7:
 
-            # create starting station
-            current_train = Train(random.choice(list(self.stations.values())))
+            # chooses a starting station based off which one still has untravelled connections
+            possible_start = []
+
+            for station in self.stations.values():
+                
+                station_connections = station.connections
+
+                points = 0
+                for connection in station_connections:
+
+                    if {station, connection} in self.used_connections:
+
+                        points += 1
+                
+                if points != len(station_connections):
+
+                    possible_start.append(station)
+
+            # lets each train run one at a time
+            current_train = Train(random.choice(list(possible_start)))
             self.trains.append(current_train)
-            
+
             while current_train.get_time_route() < 120:
 
                 current_station = current_train.get_route()[-1]
 
                 connections = current_station.connections
 
+                # decides which route to go based off which one has the highest k value
                 best_k = 0
                 for connection in connections:
 
@@ -47,9 +66,9 @@ class GreedyAlgo:
                 if {current_station, next_station} not in self.used_connections:
                     self.used_connections.append({current_station, next_station})
                 current_train.add_station(next_station)
-            #print(len(self.used_connections))
-            print(get_k(len(self.trains), (len(self.used_connections)), total_time_trains(self.trains) + connection.get_time(current_station)))
-            #print(total_time_trains(self.trains))
+            
+        print(get_k(len(self.trains), (len(self.used_connections)), total_time_trains(self.trains) + connection.get_time(current_station)))
+            
                     
 
 
