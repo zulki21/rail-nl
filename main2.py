@@ -16,9 +16,10 @@ def randomHist():
     # Labels for the histogram
     plt.xlabel("K-values")
     plt.ylabel("Frequency")
+    plt.title('Random Algorithm')
 
     # Save histogram as a png
-    plt.savefig('Histogram.png')
+    plt.savefig('Histogram.svg')
 
 
 def greedyHist():
@@ -28,9 +29,10 @@ def greedyHist():
     # Labels for the histogram
     plt.xlabel("K-values")
     plt.ylabel("Frequency")
+    plt.title('Greedy Algorithm')
 
     # Save histogram as a png
-    plt.savefig('Histogram-Greedy.png')
+    plt.savefig('Histogram-Greedy.svg')
 
 
 def createTabelRandom():
@@ -55,6 +57,6 @@ if __name__ in '__main__':
     # print(a.barChart())
 
     greedyHist()
-    randomHist()
-    createTabelRandom()
+    # randomHist()
+    # createTabelRandom()
     createTabelGreedy()
