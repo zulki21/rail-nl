@@ -56,6 +56,7 @@ class GreedyAlgo:
             # print(len(self.used_connections))
             print(get_k(len(self.trains), (len(self.used_connections)), total_time_trains(
                 self.trains) + connection.get_time(current_station)))
+
             # print(total_time_trains(self.trains))
 
 
