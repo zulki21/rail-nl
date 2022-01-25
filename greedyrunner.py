@@ -1,6 +1,7 @@
 from greedyalgo import GreedyAlgo
 import statistics
 
+
 class GreedyRunner:
     def __init__(self, N) -> None:
         self.algo_samples = []
@@ -27,7 +28,7 @@ class GreedyRunner:
 
         return {"mean": statistics.mean(dataset), "mode": statistics.mode(dataset), "median": statistics.median(dataset), "stdev": statistics.stdev(dataset), "max": max(dataset)}
 
-    def barChart(self):
+    def histogram_greedy(self):
         dataset = []
         for algo in self.algo_samples:
             dataset.append(algo.final_k())

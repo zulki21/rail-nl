@@ -1,16 +1,17 @@
 from algorunner import AlgoRunner
-from greedyalgo import GreedyAlgo
 from randomalgo import RandomAlgo
 from algorunner import AlgoRunner
+from greedyrunner import GreedyRunner
+from greedyalgo import *
 import matplotlib.pyplot as plt
 import numpy as np
 from tabulate import tabulate
 
 
-def plotHist():
+def randomHist():
 
     # Plot histogram
-    plt.hist(a.barChart(), bins='auto')
+    plt.hist(a.histogram_random(), bins='auto')
 
     # Labels for the histogram
     plt.xlabel("K-values")
@@ -20,21 +21,40 @@ def plotHist():
     plt.savefig('Histogram.png')
 
 
-def createTabel():
+def greedyHist():
+    # Plot histogram
+    plt.hist(b.histogram_greedy(), bins='auto')
+
+    # Labels for the histogram
+    plt.xlabel("K-values")
+    plt.ylabel("Frequency")
+
+    # Save histogram as a png
+    plt.savefig('Histogram-Greedy.png')
+
+
+def createTabelRandom():
     content = a.stats().items()
+    print(content)
+    print(tabulate(content, tablefmt="github"))
+
+
+def createTabelGreedy():
+    content = b.stats().items()
     print(content)
     print(tabulate(content, tablefmt="github"))
 
 
 if __name__ in '__main__':
     a = AlgoRunner(100)
-    b = GreedyAlgo()
 
-    print(b.total_time_trains())
+    b = GreedyRunner(100)
 
-    print(a.max_K())
-    print(a.stats())
-    print(a.barChart())
+    # print(a.max_K())
+    # print(a.stats())
+    # print(a.barChart())
 
-    plotHist()
-    createTabel()
+    greedyHist()
+    randomHist()
+    createTabelRandom()
+    createTabelGreedy()
