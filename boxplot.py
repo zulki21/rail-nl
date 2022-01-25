@@ -21,4 +21,5 @@ for i in range(len(box_data)):
 
 # Saves the boxplot (More plots will be added with more algorithms)
 plt.boxplot(k_values, patch_artist=True, labels=['random'])
+plt.ylabel('k-values')
 plt.savefig("boxplot.png", format="png")
