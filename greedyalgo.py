@@ -67,10 +67,10 @@ class GreedyAlgo:
                     self.used_connections.append({current_station, next_station})
                 current_train.add_station(next_station)
             
-        print(get_k(len(self.trains), (len(self.used_connections)), total_time_trains(self.trains) + connection.get_time(current_station)))
             
+    def final_k(self):
+
+        return 10000 * (len(self.used_connections) / 28) - (len(self.trains) * 100 + total_time_trains(self.trains))
+
+
                     
-
-
-a = GreedyAlgo()
-
