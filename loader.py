@@ -8,7 +8,7 @@ def load_stations():
     stations = {}
 
     # Adds all stations and location to class
-    with open("StationsHolland.csv") as file:
+    with open("StationsNationaal.csv") as file:
 
         reader = csv.reader(file)
         next(reader)
@@ -18,7 +18,7 @@ def load_stations():
             stations[row[0]] = Station(row[0], row[1], row[2])
 
     # Adds all connections to the stations
-    with open("ConnectiesHolland.csv") as file:
+    with open("ConnectiesNationaal.csv") as file:
 
         reader = csv.reader(file)
         next(reader)

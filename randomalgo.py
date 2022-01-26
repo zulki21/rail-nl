@@ -96,14 +96,14 @@ class RandomAlgo:
                     self.all_connections.append({station, connection})
 
     # adding routes to the trains randomly
-        for i in range(random.randint(0, 7)):
+        for i in range(random.randint(0, 20)):
             starting_station = random.choice(list(self.stations.values()))
 
             self.trains.append(Train(starting_station))
 
         for train in self.trains:
             current_station = train.get_route()[0]
-            while train.get_time_route() < 120:
+            while train.get_time_route() <= 180:
 
                 connections = list(current_station.get_connections().keys())
                 potential_connections = []
@@ -130,12 +130,12 @@ class RandomAlgo:
         secnd_set = set(secnd_tuple_list)
         diff = first_set.symmetric_difference(secnd_set)
 
-        while len(diff) > 0 and len(self.trains) <= 7:
+        while len(diff) > 0 and len(self.trains) <= 20:
             starting_station = random.sample(diff, 1)[0][0]
             self.trains.append(Train(starting_station))
             train = self.trains[-1]
             current_station = train.get_route()[0]
-            while train.get_time_route() < 120:
+            while train.get_time_route() < 180:
 
                 connections = list(current_station.get_connections().keys())
                 potential_connections = []
@@ -162,7 +162,7 @@ class RandomAlgo:
             secnd_set = set(secnd_tuple_list)
             diff = first_set.symmetric_difference(secnd_set)
 
-            if len(self.used_connections) != 28:
+            if len(self.used_connections) != 89:
                 self.reset()
 
     def reset(self):
@@ -174,7 +174,7 @@ class RandomAlgo:
 
         min = total_time_trains(self.trains)
 
-        K = 10000 * (a / 28) - (len(self.trains) * 100 + min)
+        K = 10000 * (a / 89) - (len(self.trains) * 100 + min)
         return K
 
     def get_trains(self):

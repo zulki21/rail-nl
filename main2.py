@@ -41,22 +41,21 @@ def createTabelRandom():
     print(tabulate(content, tablefmt="github"))
 
 
-def createTabelGreedy():
-    content = b.stats().items()
-    print(content)
-    print(tabulate(content, tablefmt="github"))
+# def createTabelGreedy():
+#     content = b.stats().items()
+#     print(content)
+#     print(tabulate(content, tablefmt="github"))
 
 
 if __name__ in '__main__':
     a = AlgoRunner(100)
 
-    b = GreedyRunner(100)
 
     # print(a.max_K())
     # print(a.stats())
     # print(a.barChart())
 
-    greedyHist()
-    # randomHist()
-    # createTabelRandom()
-    createTabelGreedy()
+    # greedyHist()
+    # # randomHist()
+    # # createTabelRandom()
+    # createTabelGreedy()
