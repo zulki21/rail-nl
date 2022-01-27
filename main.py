@@ -1,11 +1,11 @@
-from loader import load_stations
-from connection import Train
+from code.mainCode.loader import load_stations
+from code.mainCode.connection import Train
 import random
 import csv
-from visualize import *
-from algorunner import AlgoRunner
-from randomalgo import RandomAlgo
-from greedyrunner import GreedyRunner
+from code.visualization.visualize import *
+from code.algorithmRunner.algorunner import AlgoRunner
+from code.algorithms.randomalgo import RandomAlgo
+from code.algorithmRunner.greedyrunner import GreedyRunner
 
 
 if __name__ in '__main__':
