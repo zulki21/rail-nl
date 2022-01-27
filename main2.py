@@ -56,7 +56,7 @@ if __name__ in '__main__':
     # print(a.stats())
     # print(a.barChart())
 
-    greedyHist()
-    randomHist()
+    # greedyHist()
+    # randomHist()
     createTabelRandom()
     # createTabelGreedy()
