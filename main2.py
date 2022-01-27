@@ -58,5 +58,6 @@ if __name__ in '__main__':
 
     # greedyHist()
     # randomHist()
+
     createTabelRandom()
     # createTabelGreedy()
