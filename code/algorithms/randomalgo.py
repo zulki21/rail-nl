@@ -95,8 +95,8 @@ class RandomAlgo:
                 if check_if_contains(self.all_connections, {station, connection}) == False:
                     self.all_connections.append({station, connection})
 
-    # adding routes to the trains randomly
-        for i in range(random.randint(0, 20)):
+        # adding routes to the trains randomly
+        for i in range(random.randint(0, 19)):
             starting_station = random.choice(list(self.stations.values()))
 
             self.trains.append(Train(starting_station))
@@ -116,7 +116,9 @@ class RandomAlgo:
                     next_station = random.choice(potential_connections)
                 else:
                     next_station = random.choice(connections)
-
+                
+                if train.get_time_route() + current_station.get_time(next_station) > 180:
+                    break
                 train.add_station(next_station)
                 if check_if_contains(self.used_connections, {current_station, next_station}) == False:
                     self.used_connections.append(
@@ -130,7 +132,7 @@ class RandomAlgo:
         secnd_set = set(secnd_tuple_list)
         diff = first_set.symmetric_difference(secnd_set)
 
-        while len(diff) > 0 and len(self.trains) == 20:
+        while len(diff) > 0 and len(self.trains) < 20:
             starting_station = random.sample(diff, 1)[0][0]
             self.trains.append(Train(starting_station))
             train = self.trains[-1]
@@ -149,6 +151,10 @@ class RandomAlgo:
                 else:
                     next_station = random.choice(connections)
 
+                if train.get_time_route() + current_station.get_time(next_station) > 180:
+                    break
+
+
                 train.add_station(next_station)
                 if check_if_contains(self.used_connections, {current_station, next_station}) == False:
                     self.used_connections.append(
@@ -165,6 +171,8 @@ class RandomAlgo:
             if len(self.used_connections) != 89:
                 self.reset()
 
+            
+        
     def reset(self):
         self.__init__()
 
