@@ -1,4 +1,3 @@
-from sqlite3 import DataError
 from code.algorithms.randomalgo import RandomAlgo
 import statistics
 import sys
