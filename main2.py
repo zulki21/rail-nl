@@ -48,9 +48,9 @@ def createTabelGreedy():
 
 
 if __name__ in '__main__':
-    a = AlgoRunner(100)
+    a = AlgoRunner(5000)
 
-    b = GreedyRunner(100)
+    # b = GreedyRunner(100)
 
     # print(a.max_K())
     # print(a.stats())

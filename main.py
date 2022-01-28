@@ -11,7 +11,7 @@ from code.algorithmRunner.greedyrunner import GreedyRunner
 if __name__ in '__main__':
     stations = load_stations()
 
-    a = AlgoRunner(500)
+    a = AlgoRunner(100)
     # e = GreedyRunner(500)
     # print(list(a.max_K().keys())[0])
     # best = list(a.max_K().keys())[0]
