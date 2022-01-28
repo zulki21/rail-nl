@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 from code.algorithmRunner.algorunner import *
 from code.algorithmRunner.greedyrunner import GreedyRunner
-import numpy as np
 
 # Runs the random algorithm
 RunsRandom = AlgoRunner(1000)
