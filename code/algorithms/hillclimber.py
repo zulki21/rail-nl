@@ -92,15 +92,24 @@ class Hillclimber:
         self.all_connections = a.all_connections
         self.highest_k = a.get_k()
 
-        # Doe een kleine random aanpassing
-        # Wat voor aanpassingen zijn er mogelijk
-        # Traject erbij of eraf
-        # Station erbij of eraf
-        # Ergens een station tussenvoegen
+        self.temp_trains = self.trains
+        self.temp_used_connections = self.all_connections
+
+        self.mistake_counter = 0
+
+        while self.mistake_counter != 50:
+
+            # Doe een kleine random aanpassing
+            # Wat voor aanpassingen zijn er mogelijk
+            # Hele traject aanpassen beste denk ik
+            
         
-        # Als staat verslechterd:
-        if self.highest_k > self.get_k()
-        # Maak aanpassing ongedaan
+            # Als staat verslechterd:
+            if self.highest_k > self.get_k():
+                # Maak aanpassing ongedaan
+                self.trains = self.temp_trains
+                self.used_connections = self.temp_used_connections
+        
 
     def get_k(self):
         # calculate k value of the given random run
@@ -109,5 +118,5 @@ class Hillclimber:
         min = total_time_trains(self.trains)
 
         K = 10000 * (a / 89) - (len(self.trains) * 100 + min)
-        
+
         return K
