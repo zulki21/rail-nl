@@ -1,23 +1,23 @@
-from loader import load_stations
-from connection import Train
+from code.mainCode.loader import load_stations
+from code.mainCode.connection import Train
 import random
 import csv
-from visualize import *
-from algorunner import AlgoRunner
-from randomalgo import RandomAlgo
-from greedyrunner import GreedyRunner
+from code.visualization.visualize import *
+from code.algorithmRunner.algorunner import AlgoRunner
+from code.algorithms.randomalgo import RandomAlgo
+from code.algorithmRunner.greedyrunner import GreedyRunner
 
 
 if __name__ in '__main__':
     stations = load_stations()
 
-    # a = AlgoRunner(500)
-    e = GreedyRunner(500)
+    a = AlgoRunner(500)
+    # e = GreedyRunner(500)
     # print(list(a.max_K().keys())[0])
     # best = list(a.max_K().keys())[0]
 
-    print(list(e.max_K().keys())[0])
-    best = list(e.max_K().keys())[0]
+    print(list(a.max_K().keys())[0])
+    best = list(a.max_K().keys())[0]
 
     trains = best.get_trains()
 

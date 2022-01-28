@@ -1,5 +1,5 @@
 from sqlite3 import DataError
-from randomalgo import RandomAlgo
+from code.algorithms.randomalgo import RandomAlgo
 import statistics
 
 

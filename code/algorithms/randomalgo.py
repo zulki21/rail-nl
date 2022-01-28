@@ -1,7 +1,7 @@
 from tracemalloc import start
-from loader import load_stations
+from code.mainCode.loader import load_stations
 import random
-from connection import Train
+from code.mainCode.connection import Train
 
 
 def unique_connection_train(train):
@@ -130,7 +130,7 @@ class RandomAlgo:
         secnd_set = set(secnd_tuple_list)
         diff = first_set.symmetric_difference(secnd_set)
 
-        while len(diff) > 0 and len(self.trains) <= 20:
+        while len(diff) > 0 and len(self.trains) == 20:
             starting_station = random.sample(diff, 1)[0][0]
             self.trains.append(Train(starting_station))
             train = self.trains[-1]

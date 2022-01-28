@@ -1,8 +1,7 @@
-from algorunner import AlgoRunner
-from randomalgo import RandomAlgo
-from algorunner import AlgoRunner
-from greedyrunner import GreedyRunner
-from greedyalgo import *
+from code.algorithmRunner.algorunner import AlgoRunner
+from code.algorithms.randomalgo import RandomAlgo
+from code.algorithmRunner.greedyrunner import GreedyRunner
+from code.algorithms.greedyalgo import *
 import matplotlib.pyplot as plt
 import numpy as np
 from tabulate import tabulate
@@ -17,9 +16,10 @@ def randomHist():
     plt.xlabel("K-values")
     plt.ylabel("Frequency")
     plt.title('Random Algorithm')
+    # plt.legend(['Greedy', 'Random'])
 
     # Save histogram as a png
-    plt.savefig('Histogram.png')
+    plt.savefig('plots/Histogram.png')
 
 
 def greedyHist():
@@ -32,7 +32,7 @@ def greedyHist():
     plt.title('Greedy Algorithm')
 
     # Save histogram as a png
-    plt.savefig('Histogram-Greedy.png')
+    plt.savefig('plots/Histogram-Greedy.png')
 
 
 def createTabelRandom():
@@ -41,21 +41,23 @@ def createTabelRandom():
     print(tabulate(content, tablefmt="github"))
 
 
-# def createTabelGreedy():
-#     content = b.stats().items()
-#     print(content)
-#     print(tabulate(content, tablefmt="github"))
+def createTabelGreedy():
+    content = b.stats().items()
+    print(content)
+    print(tabulate(content, tablefmt="github"))
 
 
 if __name__ in '__main__':
     a = AlgoRunner(100)
 
+    b = GreedyRunner(100)
 
     # print(a.max_K())
     # print(a.stats())
     # print(a.barChart())
 
     # greedyHist()
-    # # randomHist()
-    # # createTabelRandom()
+    # randomHist()
+
+    createTabelRandom()
     # createTabelGreedy()
