@@ -104,7 +104,6 @@ class Hillclimber:
             # Als staat verslechterd:
             if self.highest_k >= self.get_k():
                 # Maak aanpassing ongedaan
-               
                 self.trains = temp_trains
                 self.used_connections = temp_used_connections
                 self.mistake_counter += 1
