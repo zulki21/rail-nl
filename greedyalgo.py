@@ -80,3 +80,7 @@ class GreedyAlgo:
 
     def get_trains(self):
         return self.trains
+
+a = GreedyAlgo()
+print(a.final_k())
+
