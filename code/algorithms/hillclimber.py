@@ -94,28 +94,27 @@ class Hillclimber:
         self.highest_k = a.get_k()
 
         temp_trains = self.trains
-        temp_used_connections = self.all_connections
+        temp_used_connections = self.used_connections
 
         self.mistake_counter = 0
 
-        while self.mistake_counter != 1:
+        while self.mistake_counter != 100:
             #Doe een kleine random aanpassing
             self.random_change()
-        
             # Als staat verslechterd:
-            if self.highest_k > self.get_k():
+            if self.highest_k >= self.get_k():
                 # Maak aanpassing ongedaan
+               
                 self.trains = temp_trains
                 self.used_connections = temp_used_connections
                 self.mistake_counter += 1
             else:
+
                 self.highest_k = self.get_k()
                 self.mistake_counter = 0
                 temp_trains = self.trains
                 temp_used_connections = self.used_connections
-
-
-
+            print(self.get_k())
 
     def get_k(self):
         # calculate k value of the given random run
@@ -131,11 +130,11 @@ class Hillclimber:
     def random_change(self):
         # train we want to change
         train = random.choice(self.trains) 
-
         # delete train
         self.trains.remove(train)
+        self.trains.remove(random.choice(self.trains))
+        self.trains.remove(random.choice(self.trains))
 
-        
         # recalculate used connections
     
         unique_pairs_alpha = []
@@ -165,8 +164,8 @@ class Hillclimber:
         b_set = list(set(x) for x in unique_pairs_alpha)
         b_set = list(set(frozenset(item) for item in b_set))
         b_set = [set(item) for item in set(frozenset(item) for item in b_set)]
-        self.used_connections = b_set
 
+        self.used_connections = b_set
 
         first_tuple_list = [tuple(lst) for lst in self.all_connections]
         secnd_tuple_list = [tuple(lst) for lst in self.used_connections]
@@ -203,10 +202,10 @@ class Hillclimber:
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station
-
             first_tuple_list = [tuple(lst) for lst in self.all_connections]
             secnd_tuple_list = [tuple(lst) for lst in self.used_connections]
 
             first_set = set(first_tuple_list)
             secnd_set = set(secnd_tuple_list)
             diff = first_set.symmetric_difference(secnd_set)
+            
