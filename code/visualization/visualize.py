@@ -1,6 +1,10 @@
 import plotly.express as px
 import plotly.graph_objects as go
 import geopandas as gpd
+import matplotlib.pyplot as plt
+from code.algorithmRunner.algorunner import *
+from code.algorithmRunner.greedyrunner import GreedyRunner
+import numpy as np
 
 
 def get_route(trains):
@@ -74,3 +78,47 @@ def visualize_all_routes(trains, stations):
         'center': {'lon': 4.900277615, 'lat': 52.37888718}})
 
     fig.show()
+
+
+def visualize_boxplot_Random():
+    # Runs the random algorithm
+    RunsRandom = AlgoRunner(1000)
+
+    # Stores all the seperate runs
+    box_data = RunsRandom.algo_samples
+
+    k_values = []
+
+    # Extracts the k_values for each run
+    for i in range(len(box_data)):
+
+        k = box_data[i].get_k()
+        print(k)
+        k_values.append(k)
+
+    # Saves the boxplot (More plots will be added with more algorithms)
+    plt.boxplot(k_values, patch_artist=True, labels=['random'])
+    plt.ylabel('k-values')
+    plt.savefig("plots/boxplot_Random.png", format="png")
+
+
+def visualize_boxplot_Greedy():
+    # Runs the random algorithm
+    RunsGreedy = GreedyRunner(1000)
+
+    # Stores all the seperate runs
+    box_data = RunsGreedy.algo_samples
+
+    k_values = []
+
+    # Extracts the k_values for each run
+    for i in range(len(box_data)):
+
+        k = box_data[i].final_k()
+        print(k)
+        k_values.append(k)
+
+    # Saves the boxplot (More plots will be added with more algorithms)
+    plt.boxplot(k_values, patch_artist=True, labels=['greedy'])
+    plt.ylabel('k-values')
+    plt.savefig("plots/boxplot_Greedy.png", format="png")
