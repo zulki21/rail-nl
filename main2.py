@@ -8,13 +8,6 @@ from code.visualization.visualize import visualize_boxplot_Random, visualize_box
 
 
 if __name__ in '__main__':
-    # a = AlgoRunner(5000)
-
-    # b = GreedyRunner(100)
-
-    # print(a.max_K())
-    # print(a.stats())
-    # print(a.barChart())
     # visualize_boxplot_Random()
     # visualize_boxplot_Greedy()
     # greedyHist()
