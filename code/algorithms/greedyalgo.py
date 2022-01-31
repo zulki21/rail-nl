@@ -6,7 +6,7 @@ from code.mainCode.connection import Train
 
 def get_k(trains, used_connections, minutes):
 
-    return 10000 * (used_connections / 28) - (trains * 100 + minutes)
+    return 10000 * (used_connections / 98) - (trains * 100 + minutes)
 
 
 def total_time_trains(trains):
@@ -23,7 +23,7 @@ class GreedyAlgo:
         self.trains = []
         self.used_connections = []
 
-        while len(self.used_connections) != 28 and len(self.trains) <= 7:
+        while len(self.used_connections) != 89 and len(self.trains) <= 20:
 
             # chooses a starting station based off which one still has untravelled connections
             possible_start = []
@@ -47,14 +47,14 @@ class GreedyAlgo:
             current_train = Train(random.choice(list(possible_start)))
             self.trains.append(current_train)
 
-            while current_train.get_time_route() < 120:
+            while current_train.get_time_route() < 180 and len(self.used_connections) != 89:
 
                 current_station = current_train.get_route()[-1]
 
                 connections = current_station.connections
 
                 # decides which route to go based off which one has the highest k value
-                best_k = 0
+                best_k = -10000000
                 for connection in connections:
 
                     if {current_station, connection} not in self.used_connections:
@@ -63,7 +63,7 @@ class GreedyAlgo:
                     else:
                         k = get_k(len(self.trains), (len(self.used_connections)), total_time_trains(
                             self.trains) + connection.get_time(current_station))
-
+                    
                     if k > best_k:
                         best_k = k
                         next_station = connection
@@ -74,9 +74,9 @@ class GreedyAlgo:
                 current_train.add_station(next_station)
 
     def final_k(self):
-        print(10000 * (len(self.used_connections) / 28) -
+        print(10000 * (len(self.used_connections) / 98) -
               (len(self.trains) * 100 + total_time_trains(self.trains)))
-        return 10000 * (len(self.used_connections) / 28) - (len(self.trains) * 100 + total_time_trains(self.trains))
+        return 10000 * (len(self.used_connections) / 98) - (len(self.trains) * 100 + total_time_trains(self.trains))
 
     def get_trains(self):
         return self.trains
