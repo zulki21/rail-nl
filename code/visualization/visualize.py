@@ -4,6 +4,7 @@ import geopandas as gpd
 import matplotlib.pyplot as plt
 from code.algorithmRunner.algorunner import *
 from code.algorithmRunner.greedyrunner import GreedyRunner
+from tabulate import tabulate
 import numpy as np
 
 
@@ -80,12 +81,62 @@ def visualize_all_routes(trains, stations):
     fig.show()
 
 
-def visualize_boxplot_Random():
-    # Runs the random algorithm
+def randomHist():
+    plt.figure(figsize=(5, 4))
+
     RunsRandom = AlgoRunner(1000)
+    # Plot histogram
+    plt.hist(RunsRandom.histogram_random(), bins='auto')
+
+    # Labels for the histogram
+    plt.xlabel("K-values")
+    plt.ylabel("Frequency")
+    plt.title('Random Algorithm')
+    # plt.legend(['Greedy', 'Random'])
+
+    # Save histogram as a png
+    plt.savefig('plots/histogram_Random.png')
+
+
+def greedyHist():
+    plt.figure(figsize=(5, 4))
+
+    RunsGreedy = GreedyRunner(1000)
+    # Plot histogram
+
+    plt.hist(RunsGreedy.histogram_greedy(), bins='auto')
+
+    # Labels for the histogram
+    plt.xlabel("K-values")
+    plt.ylabel("Frequency")
+    plt.title('Greedy Algorithm')
+
+    # Save histogram as a png
+    plt.savefig('plots/Histogram-Greedy.png')
+
+
+def createTabelRandom():
+
+    RandomTabelRuns = AlgoRunner(1000)
+    content = RandomTabelRuns.stats().items()
+    print(content)
+    print(tabulate(content, tablefmt="github"))
+
+
+def createTabelGreedy():
+    GreedyTabelRuns = GreedyRunner(1000)
+    content = GreedyTabelRuns.stats().items()
+    print(content)
+    print(tabulate(content, tablefmt="github"))
+
+
+def visualize_boxplot_Random():
+    plt.figure(figsize=(6, 5))
+    # Runs the random algorithm
+    RandomRuns = AlgoRunner(1000)
 
     # Stores all the seperate runs
-    box_data = RunsRandom.algo_samples
+    box_data = RandomRuns.algo_samples
 
     k_values = []
 
@@ -103,11 +154,12 @@ def visualize_boxplot_Random():
 
 
 def visualize_boxplot_Greedy():
-    # Runs the random algorithm
-    RunsGreedy = GreedyRunner(1000)
+    plt.figure(figsize=(6, 5))
+    # Runs the greedy algorithm
+    GreedyRuns = GreedyRunner(1000)
 
     # Stores all the seperate runs
-    box_data = RunsGreedy.algo_samples
+    box_data = GreedyRuns.algo_samples
 
     k_values = []
 
