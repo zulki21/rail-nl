@@ -1,6 +1,7 @@
-from sqlite3 import DataError
-from randomalgo import RandomAlgo
+from code.algorithms.randomalgo import RandomAlgo
 import statistics
+import sys
+sys.setrecursionlimit(10000)
 
 
 class AlgoRunner:
@@ -9,6 +10,7 @@ class AlgoRunner:
 
         for i in range(N):
             self.algo_samples.append(RandomAlgo())
+            print(f"{i/5000 *100}%" )
 
     def max_K(self):
         k_max = -10000
@@ -27,7 +29,7 @@ class AlgoRunner:
         for algo in self.algo_samples:
             dataset.append(algo.get_k())
 
-        return {"mean": statistics.mean(dataset), "mode": statistics.mode(dataset), "median": statistics.median(dataset), "stdev": statistics.stdev(dataset), "max": max(dataset)}
+        return {"mean": statistics.mean(dataset), "mode": statistics.mode(dataset), "median": statistics.median(dataset), "stdev": statistics.stdev(dataset), "max": max(dataset), "min": min(dataset)}
 
     def histogram_random(self):
         dataset = []

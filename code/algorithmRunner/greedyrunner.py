@@ -1,4 +1,4 @@
-from greedyalgo import GreedyAlgo
+from code.algorithms.greedyalgo import GreedyAlgo
 import statistics
 
 

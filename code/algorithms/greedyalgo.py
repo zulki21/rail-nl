@@ -1,7 +1,7 @@
 from tabnanny import check
-from loader import load_stations
+from code.mainCode.loader import load_stations
 import random
-from connection import Train
+from code.mainCode.connection import Train
 
 
 def get_k(trains, used_connections, minutes):

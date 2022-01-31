@@ -1,64 +1,88 @@
-from loader import load_stations
-from connection import Train
+from code.mainCode.loader import load_stations
+from code.mainCode.connection import Train
 import random
 import csv
-from visualize import *
-from algorunner import AlgoRunner
-from randomalgo import RandomAlgo
-from greedyrunner import GreedyRunner
+from code.visualization.visualize import *
+from code.algorithmRunner.algorunner import AlgoRunner
+from code.algorithms.randomalgo import RandomAlgo
+from code.algorithmRunner.greedyrunner import GreedyRunner
+import argparse
 
 
-if __name__ in '__main__':
-    stations = load_stations()
+def main(area, duration, lines, algorithm):
 
-    # a = AlgoRunner(500)
-    e = GreedyRunner(500)
-    # print(list(a.max_K().keys())[0])
-    # best = list(a.max_K().keys())[0]
+    if __name__ in '__main__':
+        stations = load_stations()
 
-    print(list(e.max_K().keys())[0])
-    best = list(e.max_K().keys())[0]
+        a = AlgoRunner(100)
+        # e = GreedyRunner(500)
+        # print(list(a.max_K().keys())[0])
+        # best = list(a.max_K().keys())[0]
 
-    trains = best.get_trains()
+        print(list(a.max_K().keys())[0])
+        best = list(a.max_K().keys())[0]
 
-    get_route(trains)
-    c = []
+        trains = best.get_trains()
 
-    for train in trains:
+        get_route(trains)
+        c = []
 
-        b = []
+        for train in trains:
 
-        for station in train.get_route():
-            b.append(station.get_name())
+            b = []
 
-        c.append(b)
+            for station in train.get_route():
+                b.append(station.get_name())
 
-    i = 1
+            c.append(b)
 
-    for traject in c:
-        print(f"trein{i} : {traject}")
-        i += 1
+        i = 1
 
-    get_all_stations(stations)
-    visualize_all_routes(trains, stations)
+        for traject in c:
+            print(f"trein{i} : {traject}")
+            i += 1
 
+        get_all_stations(stations)
+        visualize_all_routes(trains, stations)
 
-# with open('output_file', 'w') as f:
+    # with open('output_file', 'w') as f:
 
-#     writer = csv.writer(f)
+    #     writer = csv.writer(f)
 
-#     headers = ["trains", "stations"]
-#     writer.writerow(headers)
+    #     headers = ["trains", "stations"]
+    #     writer.writerow(headers)
 
-#     for train in trains:
+    #     for train in trains:
 
-#         route = []
+    #         route = []
 
-#         for i in range(len(train.get_route())):
+    #         for i in range(len(train.get_route())):
 
-#             route.append(train.get_route()[i]._city_name)
+    #             route.append(train.get_route()[i]._city_name)
 
-#         writer.writerow(route)
+    #         writer.writerow(route)
 
-#     score = ["SCORE = ", K]
-#     writer.writerow(score)
+    #     score = ["SCORE = ", K]
+    #     writer.writerow(score)
+
+    # Set-up parsing command line arguments
+        parser = argparse.ArgumentParser(
+            description="Run program with required and optional arguments")
+
+        # Adding arguments
+        parser.add_argument("-a", "--area",
+                            help="Area run the algorithms")
+        parser.add_argument("-d", "--duration",
+                            help="Max duration for one line")
+        parser.add_argument("-L", "--lines", help="Max number of lines")
+        parser.add_argument("-A", "--algorithm", help="Algorithms to run")
+        parser.add_argument("-h", "--help", help="Prints this message")
+        parser.add_argument("-r", "--repeat", help="Number of repetions")
+        parser.add_argument("-i", "--iterations",
+                            help="Number of iterations per run")
+
+        # Read arguments from command line
+        args = parser.parse_args()
+
+        # Run main with provide arguments
+        main(args.area, args.duration, args.lines, args.algorithm)
