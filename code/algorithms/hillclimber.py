@@ -1,6 +1,6 @@
 from pyrsistent import b
-from randomalgo import RandomAlgo
-from connection import Train
+from code.algorithms.randomalgo import RandomAlgo
+from code.mainCode.connection import Train
 import random
 
 def total_time_trains(trains):
@@ -41,7 +41,7 @@ class Hillclimber:
 
 
         
-        while self.mistake_counter < 10000:
+        while self.mistake_counter < 5000:
             
             self.random_change()
 
@@ -54,8 +54,6 @@ class Hillclimber:
                 self.used_connections = self.best_used_connections[:]
                 self.trains = self.best_trains[:]
                 self.mistake_counter += 1
-
-            print(f"k-score :{self.get_k()}")
             
     def random_change(self):
         # train we want to change
