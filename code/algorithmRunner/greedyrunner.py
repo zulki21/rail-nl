@@ -1,4 +1,4 @@
-from code.algorithms.greedyalgo import GreedyAlgo
+from railNL.code.algorithms.greedyalgo import GreedyAlgo
 import statistics
 
 
