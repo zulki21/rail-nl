@@ -1,67 +1,7 @@
 from pyrsistent import b
-from code.algorithms.randomalgo import RandomAlgo
-from code.mainCode.connection import Train
+from randomalgo import RandomAlgo
+from connection import Train
 import random
-
-def unique_connection_train(train):
-    """
-    finds all unique connections of this train
-
-    Parameters
-    ----------
-    train: train object
-        will look at route of train
-    Returns
-    ------
-    list of lists
-        contains unique combination of every connection in route
-    """
-
-    pairs = []
-    i = 0
-    route = train.get_route()
-
-    for i in range((len(route) - 1)):
-        pairs.append([route[i].get_name(), route[i + 1].get_name()])
-
-    unique_pairs = []
-    for pair in pairs:
-        unique_pairs.append(sorted(pair))
-
-    b_set = set(tuple(x) for x in unique_pairs)
-    b = [list(x) for x in b_set]
-
-    return b
-
-
-def unique_total_connections(list_of_trains):
-    """
-    finds all unique connections of all trains
-
-    Parameters
-    ----------
-    train: train object
-        will look at route of train
-    Returns
-    ------
-    list of lists
-        contains unique combination of every connection in route
-    """
-    unique_pairs = []
-
-    combis = []
-    for train in list_of_trains:
-        abc = unique_connection_train(train)
-        combis.extend(abc)
-
-    for pair in combis:
-        unique_pairs.append(sorted(pair))
-
-    b_set = set(tuple(x) for x in unique_pairs)
-    b = [list(x) for x in b_set]
-
-    return len(b)
-
 
 def total_time_trains(trains):
     min = 0
@@ -91,41 +31,32 @@ class Hillclimber:
         self.trains = a.trains
         self.used_connections = a.used_connections
         self.all_connections = a.all_connections
+        self.unused_connections = list(set([frozenset(i) for i in self.all_connections]) - set([frozenset(i) for i in self.used_connections]))
+
+        self.best_used_connections = a.used_connections[:]
+        self.best_trains = a.trains[:]
         self.highest_k = a.get_k()
-
-        temp_trains = self.trains
-        temp_used_connections = self.used_connections
-
+        
         self.mistake_counter = 0
 
-        while self.mistake_counter != 100:
-            #Doe een kleine random aanpassing
+
+        
+        while self.mistake_counter < 10000:
+            
             self.random_change()
-            # Als staat verslechterd:
-            if self.highest_k >= self.get_k():
-                # Maak aanpassing ongedaan
-                self.trains = temp_trains
-                self.used_connections = temp_used_connections
-                self.mistake_counter += 1
-            else:
 
-                self.highest_k = self.get_k()
+            if self.get_k() > self.highest_k:
                 self.mistake_counter = 0
-                temp_trains = self.trains
-                temp_used_connections = self.used_connections
-            print(self.get_k())
+                self.best_used_connections = self.used_connections[:]
+                self.best_trains = self.trains[:]
+                self.highest_k = self.get_k()
+            else: 
+                self.used_connections = self.best_used_connections[:]
+                self.trains = self.best_trains[:]
+                self.mistake_counter += 1
 
-    def get_k(self):
-        # calculate k value of the given random run
-        a = unique_total_connections(self.trains)
-
-        min = total_time_trains(self.trains)
-
-        K = 10000 * (a / 89) - (len(self.trains) * 100 + min)
-
-        return K
-
-
+            print(f"k-score :{self.get_k()}")
+            
     def random_change(self):
         # train we want to change
         train = random.choice(self.trains) 
@@ -207,4 +138,14 @@ class Hillclimber:
             first_set = set(first_tuple_list)
             secnd_set = set(secnd_tuple_list)
             diff = first_set.symmetric_difference(secnd_set)
-            
+
+    
+    def get_k(self):
+        # calculate k value of the given random run
+        a = len(self.used_connections)
+        min = total_time_trains(self.trains)
+        K = 10000 * (a / 89) - (len(self.trains) * 100 + min)
+        return K
+
+    def get_unused(self):
+        return list(set([frozenset(i) for i in self.all_connections]) - set([frozenset(i) for i in self.used_connections]))
