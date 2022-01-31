@@ -1,7 +1,7 @@
 from code.algorithmRunner.algorunner import AlgoRunner
+from code.algorithmRunner.hillclimberrunner import AlgoRunnerHill
 from code.algorithms.randomalgo import RandomAlgo
 from code.algorithmRunner.greedyrunner import GreedyRunner
-from railNL.code.greedyalgo import *
 import matplotlib.pyplot as plt
 import numpy as np
 from tabulate import tabulate
@@ -48,7 +48,7 @@ def createTabelGreedy():
 
 
 if __name__ in '__main__':
-    a = AlgoRunner(5000)
+    a = AlgoRunnerHill(100)
 
     # b = GreedyRunner(100)
 
