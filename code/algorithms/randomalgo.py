@@ -82,11 +82,21 @@ def check_if_contains(all_connections, set):
 
 
 class RandomAlgo:
-    def __init__(self) -> None:
-        self.stations = load_stations()
+    def __init__(self, region) -> None:
+        self.region = region
+        self.stations = load_stations(self.region)
         self.trains = []
         self.used_connections = []
         self.all_connections = []
+
+        if self.region == 1:
+            self.number_connection = 28
+            self.max_time = 120
+            self.max_trains = 7
+        elif self.region == 2:
+            self.number_connection = 89
+            self.max_time = 180
+            self.max_trains = 20
 
         # creates object with all connections
         for station in self.stations.values():
@@ -95,14 +105,14 @@ class RandomAlgo:
                     self.all_connections.append({station, connection})
 
         # adding routes to the trains randomly
-        for i in range(random.randint(0, 19)):
+        for i in range(random.randint(0, self.max_trains - 1)):
             starting_station = random.choice(list(self.stations.values()))
 
             self.trains.append(Train(starting_station))
 
         for train in self.trains:
             current_station = train.get_route()[0]
-            while train.get_time_route() <= 180:
+            while train.get_time_route() <= self.max_time:
 
                 connections = list(current_station.get_connections().keys())
                 potential_connections = []
@@ -115,8 +125,8 @@ class RandomAlgo:
                     next_station = random.choice(potential_connections)
                 else:
                     next_station = random.choice(connections)
-                
-                if train.get_time_route() + current_station.get_time(next_station) > 180:
+
+                if train.get_time_route() + current_station.get_time(next_station) > self.max_time:
                     break
                 train.add_station(next_station)
                 if check_if_contains(self.used_connections, {current_station, next_station}) == False:
@@ -131,7 +141,7 @@ class RandomAlgo:
         secnd_set = set(secnd_tuple_list)
         diff = first_set.symmetric_difference(secnd_set)
 
-        while len(diff) > 0 and len(self.trains) < 20:
+        while len(diff) > 0 and len(self.trains) < self.max_trains:
             starting_station = random.sample(diff, 1)[0][0]
             self.trains.append(Train(starting_station))
             train = self.trains[-1]
@@ -153,7 +163,6 @@ class RandomAlgo:
                 if train.get_time_route() + current_station.get_time(next_station) > 180:
                     break
 
-
                 train.add_station(next_station)
                 if check_if_contains(self.used_connections, {current_station, next_station}) == False:
                     self.used_connections.append(
@@ -167,13 +176,11 @@ class RandomAlgo:
             secnd_set = set(secnd_tuple_list)
             diff = first_set.symmetric_difference(secnd_set)
 
-            if len(self.used_connections) != 89:
+            if len(self.used_connections) != self.number_connection:
                 self.reset()
 
-            
-        
     def reset(self):
-        self.__init__()
+        self.__init__(self.region)
 
     def get_k(self):
         # calculate k value of the given random run
@@ -181,7 +188,8 @@ class RandomAlgo:
 
         min = total_time_trains(self.trains)
 
-        K = 10000 * (a / 89) - (len(self.trains) * 100 + min)
+        K = 10000 * (a / self.number_connection) - \
+            (len(self.trains) * 100 + min)
         return K
 
     def get_trains(self):

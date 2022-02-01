@@ -9,7 +9,7 @@ class AlgoRunnerHill:
         self.algo_samples = []
         for i in range(N):
             self.algo_samples.append(Hillclimber())
-            print(f"{i/N *100}%" )
+            print(f"{i/N *100}%")
 
     def max_K(self):
         k_max = -10000
@@ -30,7 +30,7 @@ class AlgoRunnerHill:
 
         return {"mean": statistics.mean(dataset), "mode": statistics.mode(dataset), "median": statistics.median(dataset), "stdev": statistics.stdev(dataset), "max": max(dataset), "min": min(dataset)}
 
-    def histogram_random(self):
+    def histogram_hillclimber(self):
         dataset = []
         for algo in self.algo_samples:
             dataset.append(algo.get_k())

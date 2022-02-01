@@ -1,9 +1,9 @@
-from railNL.code.algorithms.greedyalgo import GreedyAlgo
+from code.algorithms.greedyalgo import GreedyAlgo
 import statistics
 
 
 class GreedyRunner:
-    def __init__(self, N) -> None:
+    def __init__(self, name_algo, sample_size) -> None:
         self.algo_samples = []
 
         for i in range(N):
@@ -14,7 +14,7 @@ class GreedyRunner:
         best_algo = None
 
         for algo in self.algo_samples:
-            if algo.final_k() > k_max:
+            if algo.get_k() > k_max:
                 k_max = algo.final_k()
                 best_algo = algo
 
@@ -24,12 +24,12 @@ class GreedyRunner:
     def stats(self):
         dataset = []
         for algo in self.algo_samples:
-            dataset.append(algo.final_k())
+            dataset.append(algo.get_k())
 
         return {"mean": statistics.mean(dataset), "mode": statistics.mode(dataset), "median": statistics.median(dataset), "stdev": statistics.stdev(dataset), "max": max(dataset)}
 
     def histogram_greedy(self):
         dataset = []
         for algo in self.algo_samples:
-            dataset.append(algo.final_k())
+            dataset.append(algo.get_k())
         return dataset

@@ -104,46 +104,66 @@ class Hillclimber:
 
         self.used_connections = b_set
 
-        first_tuple_list = [tuple(lst) for lst in self.all_connections]
-        secnd_tuple_list = [tuple(lst) for lst in self.used_connections]
+         while len(self.used_connections) != self.number_connection and len(self.trains) < self.max_trains:
 
-        first_set = set(first_tuple_list)
-        secnd_set = set(secnd_tuple_list)
-        diff = first_set.symmetric_difference(secnd_set)
+              # chooses a starting station based off which one still has untravelled connections
+              possible_start = []
 
-        while len(diff) > 0 and len(self.trains) < self.max_trains:
-            starting_station = random.sample(diff, 1)[0][0]
-            self.trains.append(Train(starting_station))
-            train = self.trains[-1]
-            current_station = train.get_route()[0]
-            while train.get_time_route() < self.max_time:
+               for station in self.stations.values():
 
-                connections = list(current_station.get_connections().keys())
-                potential_connections = []
+                    station_connections = station.connections
 
-                for next_station in connections:
-                    if check_if_contains(self.used_connections, {current_station, next_station}) == False:
-                        potential_connections.append(next_station)
+                    points = 0
+                    for connection in station_connections:
 
-                if len(potential_connections) != 0:
-                    next_station = random.choice(potential_connections)
-                else:
-                    next_station = random.choice(connections)
+                        if {station, connection} in self.used_connections:
 
-                if train.get_time_route() + current_station.get_time(next_station) > self.max_time:
-                    break
+                            points += 1
 
-                train.add_station(next_station)
-                if check_if_contains(self.used_connections, {current_station, next_station}) == False:
-                    self.used_connections.append(
-                        {current_station, next_station})
-                current_station = next_station
-            first_tuple_list = [tuple(lst) for lst in self.all_connections]
-            secnd_tuple_list = [tuple(lst) for lst in self.used_connections]
+                    if points != len(station_connections):
 
-            first_set = set(first_tuple_list)
-            secnd_set = set(secnd_tuple_list)
-            diff = first_set.symmetric_difference(secnd_set)
+                        possible_start.append(station)
+
+                # lets each train run one at a time
+                current_train = Train(random.choice(list(possible_start)))
+                self.trains.append(current_train)
+
+                while current_train.get_time_route() < self.max_time and len(self.used_connections) != self.number_connection:
+
+                    current_station = current_train.get_route()[-1]
+
+                    connections = current_station.connections
+
+                    # decides which route to go based off which one has the highest k value
+                    best_k = -10000000
+                    avaliable_routes = 0
+                    for connection in connections:
+
+                        if current_train.get_time_route() + current_station.get_time(connection) <= self.max_time:
+
+                            if {current_station, connection} not in self.used_connections:
+                                k = k_value(len(self.trains), (len(self.used_connections) + 1),
+                                            total_time_trains(self.trains) + connection.get_time(current_station), self.region)
+                            else:
+                                k = k_value(len(self.trains), (len(self.used_connections)), total_time_trains(
+                                    self.trains) + connection.get_time(current_station), self.region)
+
+                            if k > best_k:
+                                best_k = k
+                                next_station = connection
+
+                            avaliable_routes += 1
+
+                    if avaliable_routes == 0:
+                        break
+
+                    elif len(current_train.get_route()) > 2 and next_station == current_train.get_route()[-2]:
+                        break
+
+                    elif {current_station, next_station} not in self.used_connections:
+                        self.used_connections.append(
+                            {current_station, next_station})
+                    current_train.add_station(next_station)
 
     def get_k(self):
         # calculate k value of the given random run

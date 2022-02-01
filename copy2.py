@@ -4,15 +4,9 @@ import random
 from code.mainCode.connection import Train
 
 
-def k_value(trains, used_connections, minutes, region):
+def get_k(trains, used_connections, minutes):
 
-    if region == 1:
-
-        return 10000 * (used_connections / 28) - (trains * 100 + minutes)
-
-    if region == 2:
-
-        return 10000 * (used_connections / 89) - (trains * 100 + minutes)
+    return 10000 * (used_connections / 89) - (trains * 100 + minutes)
 
 
 def total_time_trains(trains):
@@ -24,21 +18,12 @@ def total_time_trains(trains):
 
 
 class GreedyAlgo:
-    def __init__(self, region):
-        self.region = region
-        self.stations = load_stations(region)
+    def __init__(self):
+        self.stations = load_stations()
         self.trains = []
         self.used_connections = []
-        if region == 1:
-            self.number_connection = 28
-            self.max_time = 120
-            self.max_trains = 7
-        elif region == 2:
-            self.number_connection = 89
-            self.max_time = 180
-            self.max_trains = 20
 
-        while len(self.used_connections) != self.number_connection and len(self.trains) < self.max_trains:
+        while len(self.used_connections) != 89 and len(self.trains) < 20:
 
             # chooses a starting station based off which one still has untravelled connections
             possible_start = []
@@ -62,7 +47,7 @@ class GreedyAlgo:
             current_train = Train(random.choice(list(possible_start)))
             self.trains.append(current_train)
 
-            while current_train.get_time_route() < self.max_time and len(self.used_connections) != self.number_connection:
+            while current_train.get_time_route() < 180 and len(self.used_connections) != 89:
 
                 current_station = current_train.get_route()[-1]
 
@@ -73,14 +58,14 @@ class GreedyAlgo:
                 avaliable_routes = 0
                 for connection in connections:
 
-                    if current_train.get_time_route() + current_station.get_time(connection) <= self.max_time:
+                    if current_train.get_time_route() + current_station.get_time(connection) <= 180:
 
                         if {current_station, connection} not in self.used_connections:
-                            k = k_value(len(self.trains), (len(self.used_connections) + 1),
-                                        total_time_trains(self.trains) + connection.get_time(current_station), self.region)
+                            k = get_k(len(self.trains), (len(self.used_connections) + 1),
+                                      total_time_trains(self.trains) + connection.get_time(current_station))
                         else:
-                            k = k_value(len(self.trains), (len(self.used_connections)), total_time_trains(
-                                self.trains) + connection.get_time(current_station), self.region)
+                            k = get_k(len(self.trains), (len(self.used_connections)), total_time_trains(
+                                self.trains) + connection.get_time(current_station))
 
                         if k > best_k:
                             best_k = k
@@ -91,20 +76,20 @@ class GreedyAlgo:
                 if avaliable_routes == 0:
                     break
 
-                elif len(current_train.get_route()) > 2 and next_station == current_train.get_route()[-2]:
-                    break
-
                 elif {current_station, next_station} not in self.used_connections:
                     self.used_connections.append(
                         {current_station, next_station})
                 current_train.add_station(next_station)
         print(len(self.used_connections))
-        print(k_value(len(self.trains), (len(self.used_connections)), total_time_trains(
-            self.trains) + connection.get_time(current_station), self.region))
+        print(len(self.trains))
 
-    def get_k(self):
+    def final_k(self):
 
-        return 10000 * (len(self.used_connections) / self.number_connection) - (len(self.trains) * 100 + total_time_trains(self.trains))
+        return 10000 * (len(self.used_connections) / 89) - (len(self.trains) * 100 + total_time_trains(self.trains))
 
     def get_trains(self):
         return self.trains
+
+
+a = GreedyAlgo()
+print(a.final_k())

@@ -3,12 +3,21 @@ from code.mainCode.connection import Station
 import csv
 
 
-def load_stations():
+def load_stations(region):
+    if region == 1:
+        load_stations = "data/StationsHolland.csv"
+        load_connections = "data/ConnectiesHolland.csv"
+
+    elif region == 2:
+        load_stations = "data/StationsNationaal.csv"
+        load_connections = "data/ConnectiesNationaal.csv"
+    else:
+        raise Exception("Argument not valid")
 
     stations = {}
 
     # Adds all stations and location to class
-    with open("data/StationsNationaal.csv") as file:
+    with open(load_stations) as file:
 
         reader = csv.reader(file)
         next(reader)
@@ -18,7 +27,7 @@ def load_stations():
             stations[row[0]] = Station(row[0], row[1], row[2])
 
     # Adds all connections to the stations
-    with open("data/ConnectiesNationaal.csv") as file:
+    with open(load_connections) as file:
 
         reader = csv.reader(file)
         next(reader)

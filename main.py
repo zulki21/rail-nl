@@ -4,31 +4,54 @@ import random
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
+import argparse
 from code.algorithmRunner.hillclimberrunner import AlgoRunnerHill
 from code.algorithms.greedyalgo import GreedyAlgo
-from code.visualization.visualize import visualize_boxplot_Random, visualize_boxplot_Greedy, randomHist, greedyHist
-from code.visualization.visualize import createTabelGreedy, createTabelRandom, hillclimberHist, createTabelHillclimber
-from code.visualization.visualize import visualize_boxplot_Hillclimber
+from code.visualization.visualize import visualize_histogram, visualize_boxplot
+from code.visualization.visualize import createTabelGreedy, createTabelRandom, createTabelHillclimber
+
 from code.visualization.visualize import *
 from code.algorithmRunner.algorunner import AlgoRunner
 from code.algorithms.randomalgo import RandomAlgo
 from code.algorithmRunner.greedyrunner import GreedyRunner
-import argparse
 
 
 # def main(area, duration, lines, algorithm):
 
+
 if __name__ in '__main__':
-    stations = load_stations()
 
-    a = AlgoRunnerHill(100)
-    # e = GreedyRunner(500)
-    # print(list(a.max_K().keys())[0])
-    # best = list(a.max_K().keys())[0]
+    parser = argparse.ArgumentParser(description='RailNL')
+    parser.add_argument('region', type=int, choices=[
+                        1, 2], help='Holland ,National')
+    parser.add_argument('algo', type=int, choices=[1, 2, 3],
+                        help=('''
+                            1: Random
+                            2: Greedy
+                            3: Hillclimber
+                            '''))
+    parser.add_argument('sample_size', type=int,
+                        default=50, help="choose the sample size for preferred algorithm")
+    parser.add_argument('bound_climber', type=int, default=500,
+                        help="allowed mistake count before restart hillclimber algorithm")
+    args = parser.parse_args()
 
-    print(list(a.max_K().keys())[0])
-    best = list(a.max_K().keys())[0]
+    stations = load_stations(args.region)
 
+    list_of_algos = AlgoRunner(
+        args.algo, args.sample_size, args.region, args.bound_climber)
+
+    if args.region == 1 and args.algo == 1:
+        output_file_hist = 'plots/histograms/histogram_Random_Holland.png'
+        output_file_box = 'plots/boxplots/boxplot_Random_Holland.png'
+        visualize_histogram(list_of_algos, output_file_hist)
+        visualize_boxplot(list_of_algos, output_file_box)
+
+    # if args.region == 2 and args.algo == 1:
+    #     output_file = 'plots/histogram_Random_Nationaal.png'
+    #     histogram(list_of_algos, output_file)
+
+    best = list(list_of_algos.max_K().keys())[0]
     trains = best.get_trains()
 
     get_route(trains)
@@ -49,18 +72,16 @@ if __name__ in '__main__':
         print(f"trein{i} : {traject}")
         i += 1
 
+    visualize_boxplot(list_of_algos, output_file_box)
+
+    visualize_histogram(list_of_algos, output_file_hist)
+
+    createTabelRandom(list_of_algos)
+    createTabelGreedy(list_of_algos)
+    createTabelHillclimber(list_of_algos)
+
     get_all_stations(stations)
     visualize_all_routes(trains, stations)
-
-    # visualize_boxplot_Random()
-    # visualize_boxplot_Greedy()
-    visualize_boxplot_Hillclimber()
-    # greedyHist()
-    # randomHist()
-    hillclimberHist()
-    # createTabelRandom()
-    # createTabelGreedy()
-    createTabelHillclimber()
 
     # with open('output_file', 'w') as f:
 
@@ -81,25 +102,3 @@ if __name__ in '__main__':
 
     #     score = ["SCORE = ", K]
     #     writer.writerow(score)
-
-    # Set-up parsing command line arguments
-    # parser = argparse.ArgumentParser(
-    #     description="Run program with required and optional arguments")
-
-    # # Adding arguments
-    # parser.add_argument("-a", "--area",
-    #                     help="Area run the algorithms")
-    # parser.add_argument("-d", "--duration",
-    #                     help="Max duration for one line")
-    # parser.add_argument("-L", "--lines", help="Max number of lines")
-    # parser.add_argument("-A", "--algorithm", help="Algorithms to run")
-    # parser.add_argument("-h", "--help", help="Prints this message")
-    # parser.add_argument("-r", "--repeat", help="Number of repetions")
-    # parser.add_argument("-i", "--iterations",
-    #                     help="Number of iterations per run")
-
-    # # Read arguments from command line
-    # args = parser.parse_args()
-
-    # # Run main with provide arguments
-    # main(args.area, args.duration, args.lines, args.algorithm)
