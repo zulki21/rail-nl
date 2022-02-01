@@ -2,8 +2,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import geopandas as gpd
 import matplotlib.pyplot as plt
-from code.algorithmRunner.algorunner import *
+from code.algorithmRunner.algorunner import AlgoRunner
 from code.algorithmRunner.greedyrunner import GreedyRunner
+from code.algorithmRunner.hillclimberrunner import AlgoRunnerHill
 from tabulate import tabulate
 import numpy as np
 
@@ -115,6 +116,23 @@ def greedyHist():
     plt.savefig('plots/Histogram-Greedy.png')
 
 
+def hillclimberHist():
+    plt.figure(figsize=(5, 4))
+
+    RunsHillclimber = AlgoRunnerHill(100)
+    # Plot histogram
+
+    plt.hist(RunsHillclimber.histogram_hillclimber(), bins='auto')
+
+    # Labels for the histogram
+    plt.xlabel("K-values")
+    plt.ylabel("Frequency")
+    plt.title('Greedy Algorithm')
+
+    # Save histogram as a png
+    plt.savefig('plots/Histogram-Hillclimber.png')
+
+
 def createTabelRandom():
 
     RandomTabelRuns = AlgoRunner(1000)
@@ -126,6 +144,13 @@ def createTabelRandom():
 def createTabelGreedy():
     GreedyTabelRuns = GreedyRunner(1000)
     content = GreedyTabelRuns.stats().items()
+    print(content)
+    print(tabulate(content, tablefmt="github"))
+
+
+def createTabelHillclimber():
+    HillclimberTabelRuns = AlgoRunnerHill(100)
+    content = HillclimberTabelRuns.stats().items()
     print(content)
     print(tabulate(content, tablefmt="github"))
 
@@ -174,3 +199,26 @@ def visualize_boxplot_Greedy():
     plt.boxplot(k_values, patch_artist=True, labels=['greedy'])
     plt.ylabel('k-values')
     plt.savefig("plots/boxplot_Greedy.png", format="png")
+
+
+def visualize_boxplot_Hillclimber():
+    plt.figure(figsize=(6, 5))
+    # Runs the greedy algorithm
+    HillclimberRuns = AlgoRunnerHill(100)
+
+    # Stores all the seperate runs
+    box_data = HillclimberRuns.algo_samples
+
+    k_values = []
+
+    # Extracts the k_values for each run
+    for i in range(len(box_data)):
+
+        k = box_data[i].get_k()
+        print(k)
+        k_values.append(k)
+
+    # Saves the boxplot (More plots will be added with more algorithms)
+    plt.boxplot(k_values, patch_artist=True, labels=['hillclimber'])
+    plt.ylabel('k-values')
+    plt.savefig("plots/boxplot_Hillclimber.png", format="png")
