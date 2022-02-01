@@ -34,7 +34,7 @@ if __name__ in '__main__':
                             '''))
     parser.add_argument('sample_size', type=int,
                         default=50, help="choose the sample size for preferred algorithm")
-    parser.add_argument('bound_climber', type=int, default=500,
+    parser.add_argument('-bound_climber', type=int, default=500,
                         help="allowed mistake count before restart hillclimber algorithm")
     args = parser.parse_args()
 
