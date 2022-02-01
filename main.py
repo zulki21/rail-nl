@@ -44,12 +44,29 @@ if __name__ in '__main__':
     if args.region == 1 and args.algo == 1:
         output_file_hist = 'plots/histograms/histogram_Random_Holland.png'
         output_file_box = 'plots/boxplots/boxplot_Random_Holland.png'
-        visualize_histogram(list_of_algos, output_file_hist)
-        visualize_boxplot(list_of_algos, output_file_box)
 
-    # if args.region == 2 and args.algo == 1:
-    #     output_file = 'plots/histogram_Random_Nationaal.png'
-    #     histogram(list_of_algos, output_file)
+    if args.region == 2 and args.algo == 1:
+        output_file_hist = 'plots/histograms/histogram_Random_Nationaal.png'
+        output_file_box = 'plots/boxplots/boxplot_Random_Nationaal.png'
+
+    if args.region == 1 and args.algo == 2:
+        output_file_hist = 'plots/histograms/histogram_Greedy_Holland.png'
+        output_file_box = 'plots/boxplots/boxplot_Greedy_Holland.png'
+
+    if args.region == 2 and args.algo == 2:
+        output_file_hist = 'plots/histograms/histogram_Greedy_Nationaal.png'
+        output_file_box = 'plots/boxplots/boxplot_Greedy_Nationaal.png'
+
+    if args.region == 1 and args.algo == 3:
+        output_file_hist = 'plots/histograms/histogram_Hillclimber_Holland.png'
+        output_file_box = 'plots/boxplots/boxplot_Hillclimber_Holland.png'
+
+    if args.region == 2 and args.algo == 3:
+        output_file_hist = 'plots/histograms/histogram_Hillclimber_Nationaal.png'
+        output_file_box = 'plots/boxplots/boxplot_Hillclimber_Nationaal.png'
+
+    visualize_histogram(list_of_algos, output_file_hist)
+    visualize_boxplot(list_of_algos, output_file_box)
 
     best = list(list_of_algos.max_K().keys())[0]
     trains = best.get_trains()
