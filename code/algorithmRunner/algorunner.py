@@ -15,23 +15,23 @@ class AlgoRunner:
         if algorithm == 1:
             for i in range(self.N):
                 self.algo_samples.append(RandomAlgo(region=region))
-                print(f"{100 * i/self.N} % completed", end="\r",flush=True)
+                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
 
         elif algorithm == 2:
             # greedy
             for i in range(1, 1 + self.N):
                 self.algo_samples.append(GreedyAlgo(region))
-                print(f"{100 * i/self.N} % completed", end="\r",flush=True)
+                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
         elif algorithm == 3:
             # hillclimber
             for i in range(self.N):
                 self.algo_samples.append(Hillclimber(region, reset_bound))
-                print(f"{100 * i/self.N} % completed", end="\r",flush=True)
+                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
         elif algorithm == 4:
             # alternative hillclimber
             for i in range(self.N):
                 self.algo_samples.append(Hillclimber_alt(region, reset_bound))
-                print(f"{100 * i/self.N} % completed", end="\r",flush=True)
+                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
 
     def max_K(self):
         k_max = -10000

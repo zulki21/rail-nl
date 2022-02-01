@@ -35,7 +35,7 @@ The structure of the files are as follows there are 4 main folders `code`, `data
 ### Usage
 
 To get started right away using the
-
+![til](./data/video.gif)
 ```
 python main.py
 ```
