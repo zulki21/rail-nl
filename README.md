@@ -2,35 +2,54 @@
 
 RailNL consists of a problem which we as BetereNS try to solve.
 
-## Aan de slag (Getting Started)
+## Getting Started
 
-### Vereisten (Prerequisites)
+### Prerequisites
 
-In requirements.txt staan alle benodigde packages om de code succesvol te draaien. Deze zijn gemakkelijk te installeren via pip dmv. de volgende instructie:
+To run the following code some dependencies are needed these can be found in 'requirements.txt'. They can be installed using the following command:
 
 ```
 pip install -r requirements.txt
 ```
 
-### Structuur (Structure)
+### Structure
 
-Alle Python scripts staan in de folder Code. In de map Data zitten alle input waardes en in de map resultaten worden alle resultaten opgeslagen door de code.
+The structure of the files are as follows
 
-### Test (Testing)
+```bash
+.
+.
+├── code
+│   ├── algorithmRunner # Contains classes which run multiple samples of algorithm
+│   ├── algorithms      # Contains different algorithm Classes
+│   ├── mainCode        # Contains main object used e.g. Trains, Stations
+│   └── visualization   # Code for visualization of output
+├── data
+├── output_files        # Raw csv files with output of best sample from run
+└── plots
+    ├── boxplots        # Boxplots of n samples from run
+    └── histograms      # Contains histograms of n samples for every algorithm
+```
 
-Om de code te draaien met de standaardconfiguratie (bv. brute-force en voorbeeld.csv) gebruik de instructie:
+### Usage
+
+To get started right away using the
 
 ```
 python main.py
 ```
 
-## Auteurs (Authors)
+```
+python main.py 1 1 2 3
+```
+
+## Authors
 
 - Zulkarneyn Catak
 - Adrian Ruessink
 - Robert Youseff
 
-## Dankwoord (Acknowledgments)
+## Acknowledgments
 
 - Marleen & Pamela
 - minor programmeren van de UvA
