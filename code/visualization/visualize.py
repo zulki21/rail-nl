@@ -84,11 +84,10 @@ def visualize_all_routes(trains, stations):
 
 
 def visualize_histogram(list_of_algos, output_file_hist):
-    plt.figure(figsize=(5, 4))
 
-    RunsRandom = list_of_algos
+    runs = list_of_algos
     # Plot histogram
-    plt.hist(RunsRandom.histogram(), bins='auto')
+    plt.hist(runs.histogram(), bins='auto')
 
     # Labels for the histogram
     plt.xlabel("K-values")
@@ -101,7 +100,7 @@ def visualize_histogram(list_of_algos, output_file_hist):
     plt.savefig(output_file_hist)
 
 
-def createTabelRandom(list_of_algos):
+def create_tabel(list_of_algos):
 
     RandomTabelRuns = list_of_algos
     content = RandomTabelRuns.stats().items()
@@ -109,27 +108,36 @@ def createTabelRandom(list_of_algos):
     print(tabulate(content, tablefmt="github"))
 
 
-def createTabelGreedy(list_of_algos):
-    GreedyTabelRuns = list_of_algos
-    content = GreedyTabelRuns.stats().items()
-    print(content)
-    print(tabulate(content, tablefmt="github"))
-
-
-def createTabelHillclimber(list_of_algos):
-    HillclimberTabelRuns = list_of_algos
-    content = HillclimberTabelRuns.stats().items()
-    print(content)
-    print(tabulate(content, tablefmt="github"))
-
-
 def visualize_boxplot(list_of_algos, output_file_box):
-    plt.figure(figsize=(6, 5))
     # Runs the random algorithm
-    RandomRuns = list_of_algos
+
+    runs = list_of_algos
 
     # Stores all the seperate runs
-    box_data = RandomRuns.algo_samples
+    box_data = runs.algo_samples
+
+    k_values = []
+
+    # Extracts the k_values for each run
+    for i in range(len(box_data)):
+
+        k = box_data[i].get_k()
+        print(k)
+        k_values.append(k)
+
+    # Saves the boxplot (More plots will be added with more algorithms)
+    plt.boxplot(k_values, patch_artist=True, labels=['random'])
+    plt.ylabel('k-values')
+    plt.savefig(output_file_box, format="png")
+
+
+def combine_boxplots(all_algos, output_file_box):
+    # Runs the random algorithm
+
+    runs = all_algos
+
+    # Stores all the seperate runs
+    box_data = runs.algo_samples
 
     k_values = []
 

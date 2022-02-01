@@ -14,7 +14,7 @@ pip install -r requirements.txt
 
 ### Structure
 
-The structure of the files are as follows
+The structure of the files are as follows there are 4 main folders 'code', 'data', 'output_files' and 'plots'. 'code' contains all the code we have written. 'data' contains the data used in the research. 'output_files' contains raw csv files of the best samples we have found. 'plots' contains different graphs which show more insight into how different algorithms behave and compare to each other. In the tree below you can find some more information about every subfolder.
 
 ```bash
 .
@@ -29,6 +29,33 @@ The structure of the files are as follows
 └── plots
     ├── boxplots        # Boxplots of n samples from run
     └── histograms      # Contains histograms of n samples for every algorithm
+```
+
+```bash
+.
+├── LICENSE
+├── README.md
+├── __init__.py
+├── boxplot.py
+├── code
+│   ├── __init__.py
+│   ├── algorithmRunner # Contains classes which run multiple samples of algorithm
+│   ├── algorithms      # Contains different algorithm Classes
+│   ├── mainCode        # Contains main object used e.g. Trains, Stations
+│   └── visualization   # Code for visualization of output
+├── copy2.py
+├── data
+│   ├── ConnectiesHolland.csv
+│   ├── ConnectiesNationaal.csv
+│   ├── StationsHolland.csv
+│   └── StationsNationaal.csv
+├── main.py
+├── output_file
+├── output_files
+├── plots
+│   ├── boxplots       # Boxplots of n samples from run
+│   └── histograms     # Contains histograms of n samples for every algorithm
+└── requirements.txt
 ```
 
 ### Usage

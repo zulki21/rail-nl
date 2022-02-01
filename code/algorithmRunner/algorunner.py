@@ -1,6 +1,7 @@
 from code.algorithms.randomalgo import RandomAlgo
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.greedyalgo import GreedyAlgo
+from code.algorithms.hill_alt import Hillclimber_alt
 import statistics
 import sys
 sys.setrecursionlimit(10000)
@@ -25,6 +26,11 @@ class AlgoRunner:
             # hillclimber
             for i in range(self.N):
                 self.algo_samples.append(Hillclimber(region, reset_bound))
+                print(f"{i/self.N *100}%")
+        elif algorithm == 4:
+            # alternative hillclimber
+            for i in range(self.N):
+                self.algo_samples.append(Hillclimber_alt(region, reset_bound))
                 print(f"{i/self.N *100}%")
 
     def max_K(self):

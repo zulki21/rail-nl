@@ -98,9 +98,6 @@ class GreedyAlgo:
                     self.used_connections.append(
                         {current_station, next_station})
                 current_train.add_station(next_station)
-        print(len(self.used_connections))
-        print(k_value(len(self.trains), (len(self.used_connections)), total_time_trains(
-            self.trains) + connection.get_time(current_station), self.region))
 
     def get_k(self):
 
