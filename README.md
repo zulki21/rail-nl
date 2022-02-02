@@ -1,4 +1,4 @@
-# RailNL
+# RailNL :bullettrain_side:
 
 RailNL consisted of a problem which we as BetereNS tried to solve.
 
