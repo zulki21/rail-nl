@@ -57,7 +57,7 @@ This algorithm is a variation of the standard hillclimber algorithm it is very s
 
 Three examples of generated output could be a plot, a graph, a tabel.
 These examples are shown below:
-<img src="data/visualisatie random algorithm.png" width="20%" height="60%"/>
+<img src="data/visualisatie random algorithm.png" width="20%" height="50%"/>
 <img src="data/Histogram.png" width="30%" height="30%"/>
 <img src="data/tabel greedy.png" width="30%" height="30%"/>
 
