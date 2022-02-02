@@ -7,9 +7,9 @@ RailNL consists of a problem which we as BetereNS try to solve.
 The most important goal for this case is to design an optimized route for intercitytrains.
 This case consists (out) of two parts.
 
-### Part one North- and South-Holland
+### Part one (North- and South-Holland)
 
-In part one the assignment is to optimize the quality of the routes (north- and south-Holland only) by adhering to a number of restrictions. These restrictions are:
+In part one the assignment is to optimize the quality of the routes of north- and south-Holland by adhering to a number of restrictions. These restrictions are:
 
 - a maximum number of 7 routes
 - a timeframe of 2 hours
@@ -33,15 +33,9 @@ The goal of the second part of the case remains the same. The same formula will 
 - a timeframe of 3 hours
 - all connections must be ridden
 
-### Examples
-
-Three examples of generated output could be a plot, a graph, a tabel.
-These examples are shown below:
-<img src="data/visualisatie random algorithm.png" width="20%" height="60%"/>
-<img src="data/Histogram.png" width="30%" height="30%"/>
-<img src="data/tabel greedy.png" width="30%" height="30%"/>
-
 ## Used Algorithms
+
+In this case, we have used 4 different algorithms. The goal for using these algorithms is to optimize the k-value of the routes. The higher the k-value, the better and the more optimized the routes are.
 
 ### Random algorithm
 
@@ -58,6 +52,14 @@ korte uitleg
 ### Hillclimber-alt algorithm
 
 korte uitleg
+
+### Output examples
+
+Three examples of generated output could be a plot, a graph, a tabel.
+These examples are shown below:
+<img src="data/visualisatie random algorithm.png" width="20%" height="60%"/>
+<img src="data/Histogram.png" width="30%" height="30%"/>
+<img src="data/tabel greedy.png" width="30%" height="30%"/>
 
 ### Prerequisites
 
@@ -101,6 +103,8 @@ python main.py
 python main.py 1 1 2 3
 ```
 
+This command will provide you with some tabels, plots and graphs depending on the options that you have specified.
+
 ## Authors
 
 - Zulkarneyn Catak
@@ -112,3 +116,7 @@ python main.py 1 1 2 3
 - Marleen & Pamela
 - minor programmeren van de UvA
 - Random person on Stackoverflow
+
+## Easter egg
+
+try running the command sl in the terminal ☺
