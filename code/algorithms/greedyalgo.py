@@ -29,6 +29,7 @@ class GreedyAlgo:
         self.stations = load_stations(region)
         self.trains = []
         self.used_connections = []
+        
         if region == 1:
             self.number_connection = 28
             self.max_time = 120
