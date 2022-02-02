@@ -3,7 +3,7 @@ import subprocess
 from code.algorithms.randomalgo import RandomAlgo
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.greedyalgo import GreedyAlgo
-from code.algorithms.hill_alt import Hillclimber_alt
+from code.algorithms.hill_alt import Hillclimber_greedy
 import statistics
 import sys
 sys.setrecursionlimit(10000)
@@ -39,7 +39,7 @@ class AlgoRunner:
             n_runs = 0
             while time.time() - start < 3600:
                 print(f"run: {n_runs}")
-                self.algo_samples.append(Hillclimber_alt(
+                self.algo_samples.append(Hillclimber_greedy(
                     region=region, reset_bound=reset_bound))
                 n_runs += 1
 

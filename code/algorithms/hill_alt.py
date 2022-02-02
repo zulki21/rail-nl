@@ -33,7 +33,7 @@ def check_if_contains(all_connections, set):
     return False
 
 
-class Hillclimber_alt:
+class Hillclimber_greedy:
     def __init__(self, region, reset_bound) -> None:
 
         # Run randomalgo for a random state

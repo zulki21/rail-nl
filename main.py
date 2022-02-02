@@ -17,7 +17,7 @@ if __name__ in '__main__':
                             1: Random
                             2: Greedy
                             3: Hillclimber(Need to specify bound_climber)
-                            4: Alterantive Hillclimber(Need to specify bound_climber)
+                            4: Hillclimber_greedy (Need to specify bound_climber)
                             5: All Algorithms(Need to specify bound_climber)
                             '''))
     parser.add_argument('sample_size', type=int,
@@ -47,7 +47,7 @@ if __name__ in '__main__':
         1: 'Random',
         2: 'Greedy',
         3: 'Hillclimber',
-        4: 'Hillclimber_alt',
+        4: 'Hillclimber_greedy',
         5: 'Comparison'
     }
 
