@@ -71,7 +71,7 @@ def total_time_trains(trains):
     ----------
     trains: list of train objects
 
-    Returns   
+    Returns
     ------
     int
         time in mintues
@@ -120,7 +120,7 @@ class RandomAlgo:
     stations : dict of station objects
         dictionary containing station names and the object
     trains: list
-        list containing train objects 
+        list containing train objects
     used_connections : list of sets
         list which keeps track of used connections
     all_connections : list of sets

@@ -1,5 +1,4 @@
 import time
-import subprocess
 from code.algorithms.randomalgo import RandomAlgo
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.greedyalgo import GreedyAlgo
@@ -12,7 +11,7 @@ sys.setrecursionlimit(10000)
 class AlgoRunner:
     """
     A class used to run the algorithm multiple times and store it's data
-    
+
     ...
 
     Attributes
@@ -29,8 +28,9 @@ class AlgoRunner:
         returns different stats about the algo samples
     histogram()
         used for the histogram of the k-values
-    
+
     """
+
     def __init__(self, algorithm, sample_size, region, reset_bound) -> None:
         self.algo_samples = []
         self.N = sample_size
@@ -102,7 +102,7 @@ class AlgoRunner:
 
     def histogram(self):
         """
-        used for creating a histogram 
+        used for creating a histogram
 
         Returns
         -------

@@ -1,4 +1,3 @@
-from tabnanny import check
 from code.mainCode.loader import load_stations
 import random
 from code.mainCode.connection import Train
