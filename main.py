@@ -75,12 +75,13 @@ if __name__ in '__main__':
 
     best = list(algos[0].max_K().keys())[0]
     trains = best.get_trains()
+    best_k = list(algos[0].max_K().values())
 
     # visualizing the plot
     get_all_stations(stations)
     visualize_all_routes(trains, stations)
 
-    # creating an output
+    # creating an output file with the routes to get best k value
     with open(output_csv, 'w') as f:
 
         writer = csv.writer(f)
