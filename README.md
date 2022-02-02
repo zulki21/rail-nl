@@ -92,7 +92,7 @@ The structure of the files are as follows, there are 4 main folders `code`, `dat
 To get started right away, run the following commands
 Here is a demo:
 
-<img src="/data/data/demo.gif" width="100%" height="50%"/>
+<img src="data/demo.gif" width="100%" height="50%"/>
 
 The main file you have to call is main.py. The file takes 4 arguments
 
