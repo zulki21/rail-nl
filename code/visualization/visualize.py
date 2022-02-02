@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from tabulate import tabulate
 
 
-# this function returns all the important information which is stored inside the routes and connections
+# This function returns all the important information which is stored inside the routes and connections
 def get_route(trains):
     lats = []
     lons = []
@@ -35,7 +35,7 @@ def get_route(trains):
     return lat, lon, lats, lons, positions, b, traces_lat, traces_lon
 
 
-# this function returns the important information from the stations
+# This function returns the important information from the stations
 def get_all_stations(stations):
     station_names = []
     station_positions = []
@@ -50,7 +50,7 @@ def get_all_stations(stations):
     return station_names, station_positions, station_lats, station_lons
 
 
-# this function plots the traces of the trains
+# This function plots the traces of the trains
 def visualize_all_routes(trains, stations):
     lat, lon, lats, lons, positions, b, traces_lat, traces_lon = get_route(
         trains)
@@ -81,7 +81,7 @@ def visualize_all_routes(trains, stations):
     fig.show()
 
 
-# no matter which algorithm you run, this function will visualize a histogram for the selected options
+# No matter which algorithm you run, this function will visualize a histogram for the selected options
 def visualize_histogram(algos, output_file_hist, title, label):
     plt.figure(figsize=(6, 5))
 
@@ -98,7 +98,7 @@ def visualize_histogram(algos, output_file_hist, title, label):
     plt.savefig(output_file_hist)
 
 
-# no matter which algorithm you run, this function will visualize a tabel for the selected options
+# No matter which algorithm you run, this function will visualize a tabel for the selected options
 # this tabel will be printed in the terminal
 def create_tabel(algos):
     for algo_runner in algos:
@@ -106,12 +106,12 @@ def create_tabel(algos):
         print(tabulate(content, tablefmt="github"))
 
 
-# no matter which algorithm you run, this function will visualize a boxplot for the selected options
+# No matter which algorithm you run, this function will visualize a boxplot for the selected options
 def visualize_boxplot(algos, output_file_box, label):
     plt.figure(figsize=(6, 5))
     colors = ['blue', 'green', 'yellow', 'black', 'brown', 'purple']
 
-    # extracts the k-values and saves it
+    # Extracts the k-values and saves it
     all_k_values = []
     for i, algo_runner in enumerate(algos):
         box_data = algo_runner.algo_samples
@@ -124,14 +124,14 @@ def visualize_boxplot(algos, output_file_box, label):
 
         all_k_values.append(k_values)
 
-    # plots the boxplot
+    # Plots the boxplot
     box = plt.boxplot(all_k_values, patch_artist=True)
 
-    # sets the colors for the different boxplots
+    # Sets the colors for the different boxplots
     for i, patch in enumerate(box['boxes']):
         patch.set_facecolor(colors[i])
 
-    # styling the labels and saving the graph
+    # Styling the labels and saving the graph
     if len(all_k_values) > 1:
         plt.xticks(list(range(1, len(all_k_values) + 1)), label[:-1])
     else:

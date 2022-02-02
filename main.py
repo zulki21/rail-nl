@@ -7,7 +7,8 @@ from code.algorithmRunner.algorunner import AlgoRunner
 
 
 if __name__ in '__main__':
-    # required options to run the main
+
+    # Required options to run the main
     parser = argparse.ArgumentParser(description='RailNL')
     parser.add_argument('region', type=int, choices=[
                         1, 2], help='Holland ,National')
@@ -21,13 +22,13 @@ if __name__ in '__main__':
                             '''))
     parser.add_argument('sample_size', type=int,
                         default=50, help="choose the sample size for preferred algorithm")
-    parser.add_argument('-bound_climber', type=int, default=500,
+    parser.add_argument('bound_climber', type=int, default=500,
                         help="allowed mistake count before restart hillclimber algorithm")
     args = parser.parse_args()
 
     stations = load_stations(args.region)
 
-    # conditional argument for choosing algorithm number 5: All Algorithms
+    # Conditional argument for choosing algorithm number 5: All Algorithms
     algos = []
     if args.algo == 5:
         algos.append(AlgoRunner(
@@ -55,7 +56,7 @@ if __name__ in '__main__':
         2: 'Nationaal'
     }
 
-    # using the created dictionaries to write the different files to different output names and locations
+    # Using the created dictionaries to write the different files to different output names and locations
     output_file_hist = f'plots/histograms/histogram_{algo_names[args.algo]}_{region_names[args.region]}.png'
     output_file_box = f'plots/boxplots/boxplot_{algo_names[args.algo]}_{region_names[args.region]}.png'
     title = f'{algo_names[args.algo]} Algorithm {region_names[args.region]}'
@@ -65,7 +66,7 @@ if __name__ in '__main__':
     if args.algo == 5:
         label = list(algo_names.values())
 
-    # visualizing the graphs
+    # Visualizing the graphs
     visualize_histogram(algos, output_file_hist, title, label)
     visualize_boxplot(algos, output_file_box, label)
     create_tabel(algos)
@@ -77,11 +78,11 @@ if __name__ in '__main__':
     trains = best.get_trains()
     best_k = list(algos[0].max_K().values())
 
-    # visualizing the plot
+    # Visualizing the plot
     get_all_stations(stations)
     visualize_all_routes(trains, stations)
 
-    # creating an output file with the routes to get best k value
+    # Creating an output file with the routes to get best k value
     with open(output_csv, 'w') as f:
 
         writer = csv.writer(f)
