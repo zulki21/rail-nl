@@ -16,20 +16,14 @@ class AlgoRunner:
 
         if algorithm == 1:
             # random
-            start = time.time()
-            n_runs = 0
-            while time.time() - start < 3600:
-                print(f"run: {n_runs}")
+            for i in range(self.N):
                 self.algo_samples.append(RandomAlgo(region=region))
-                n_runs += 1
+            print(f" {100 * i/self.N} % completed", end="\r", flush=True)
         elif algorithm == 2:
             # greedy
-            start = time.time()
-            n_runs = 0
-            while time.time() - start < 3600:
-                print(f"run: {n_runs}")
+            for i in range(self.N):
                 self.algo_samples.append(GreedyAlgo(region=region))
-                n_runs += 1
+                print(f" {100 * i/self.N} % completed", end="\r", flush=True)
         elif algorithm == 3:
             # hillclimber
             start = time.time()
