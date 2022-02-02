@@ -41,6 +41,24 @@ These examples are shown below:
 <img src="data/Histogram.png" width="30%" height="30%"/>
 <img src="data/tabel greedy.png" width="30%" height="30%"/>
 
+## Used Algorithms
+
+### Random algorithm
+
+korte uitleg
+
+### Greedy algorithm
+
+korte uitleg
+
+### Hillclimber algorithm
+
+korte uitleg
+
+### Hillclimber-alt algorithm
+
+korte uitleg
+
 ### Prerequisites
 
 To run the following code some dependencies are needed these can be found in `requirements.txt`. They can be installed using the following command:
@@ -82,24 +100,6 @@ python main.py
 ```
 python main.py 1 1 2 3
 ```
-
-## Used Algorithms
-
-### Random algorithm
-
-korte uitleg
-
-### Greedy algorithm
-
-korte uitleg
-
-### Hillclimber algorithm
-
-korte uitleg
-
-### Hillclimber-alt algorithm
-
-korte uitleg
 
 ## Authors
 
