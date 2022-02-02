@@ -7,7 +7,7 @@ RailNL consists of a problem which we as BetereNS try to solve.
 The most important goal for this case is to design an optimized route for intercitytrains.
 This case consists (out) of two parts.
 
-### Part one - North- and South-Holland
+### Part one North- and South-Holland
 
 In part one the assignment is to optimize the quality of the routes (north- and south-Holland only) by adhering to a number of restrictions. These restrictions are:
 
