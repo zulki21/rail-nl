@@ -35,11 +35,11 @@ The goal of the second part of the case remains the same. The same formula will 
 
 ### Examples
 
-Three examples of generated output could be a plot, a graph, a csv-file.
+Three examples of generated output could be a plot, a graph, a tabel.
 These examples are shown below:
 <img src="data/visualisatie random algorithm.png" width="20%" height="50%"/>
-<img src="data/boxplot-greedy.svgdata/boxplot-greedy.svg" width="20%" height="50%"/>
-<img src="output_files/Hillclimber_Holland.csv" width="20%" height="50%"/>
+<img src="data/Histogram.png" width="20%" height="50%"/>
+<img src="data/tabel greedy.png" width="20%" height="50%"/>
 
 ### Prerequisites
 
