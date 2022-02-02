@@ -3,7 +3,7 @@ import subprocess
 from code.algorithms.randomalgo import RandomAlgo
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.greedyalgo import GreedyAlgo
-from code.algorithms.hill_alt import Hillclimber_greedy
+from code.algorithms.hillclimber_greedy import Hillclimber_greedy
 import statistics
 import sys
 sys.setrecursionlimit(10000)
@@ -18,7 +18,7 @@ class AlgoRunner:
             # random
             for i in range(self.N):
                 self.algo_samples.append(RandomAlgo(region=region))
-            print(f" {100 * i/self.N} % completed", end="\r", flush=True)
+                print(f" {100 * i/self.N} % completed", end="\r", flush=True)
         elif algorithm == 2:
             # greedy
             for i in range(self.N):
