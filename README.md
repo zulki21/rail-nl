@@ -35,7 +35,7 @@ The structure of the files are as follows there are 4 main folders `code`, `data
 ### Usage
 
 To get started right away using the
-https://user-images.githubusercontent.com/90260686/152143878-594c30f5-57a9-47f9-92b1-1f43ff748a6f.mp4
+<img src="/data/video.gif" width="100%" height="50%"/>
 
 
 ```
