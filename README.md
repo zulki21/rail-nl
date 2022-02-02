@@ -35,11 +35,7 @@ The structure of the files are as follows there are 4 main folders `code`, `data
 
 To get started right away using the
 <img src="/data/video.gif" width="100%" height="50%"/>
-<<<<<<< HEAD
 <img src="/data/Demo.mp4" width="100%" height="50%"/>
-=======
-
->>>>>>> 04eea442bb1240bbc078a7013ad368809f6e1e4e
 
 ```
 python main.py
