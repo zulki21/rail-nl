@@ -74,8 +74,11 @@ if __name__ in '__main__':
     if args.algo == 5:
         exit()
 
+    # Best is used for the plot
     best = list(algos[0].max_K().keys())[0]
     trains = best.get_trains()
+
+    # Best_k is used for the output
     best_k = list(algos[0].max_K().values())
 
     # Visualizing the plot
