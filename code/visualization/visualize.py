@@ -2,14 +2,10 @@ import plotly.express as px
 import plotly.graph_objects as go
 import geopandas as gpd
 import matplotlib.pyplot as plt
-from code.algorithmRunner.algorunner import AlgoRunner
-from code.algorithmRunner.greedyrunner import GreedyRunner
-from code.algorithmRunner.hillclimberrunner import AlgoRunnerHill
 from tabulate import tabulate
-import argparse
-import numpy as np
 
 
+# this function returns all the important information which is stored inside the routes and connections
 def get_route(trains):
     lats = []
     lons = []
@@ -39,6 +35,7 @@ def get_route(trains):
     return lat, lon, lats, lons, positions, b, traces_lat, traces_lon
 
 
+# this function returns the important information from the stations
 def get_all_stations(stations):
     station_names = []
     station_positions = []
@@ -53,6 +50,7 @@ def get_all_stations(stations):
     return station_names, station_positions, station_lats, station_lons
 
 
+# this function plots the traces of the trains
 def visualize_all_routes(trains, stations):
     lat, lon, lats, lons, positions, b, traces_lat, traces_lon = get_route(
         trains)
@@ -83,6 +81,7 @@ def visualize_all_routes(trains, stations):
     fig.show()
 
 
+# no matter which algorithm you run, this function will visualize a histogram for the selected options
 def visualize_histogram(algos, output_file_hist, title, label):
     plt.figure(figsize=(6, 5))
 
@@ -99,37 +98,40 @@ def visualize_histogram(algos, output_file_hist, title, label):
     plt.savefig(output_file_hist)
 
 
+# no matter which algorithm you run, this function will visualize a tabel for the selected options
+# this tabel will be printed in the terminal
 def create_tabel(algos):
     for algoRunner in algos:
         content = algoRunner.stats().items()
         print(tabulate(content, tablefmt="github"))
 
 
+# no matter which algorithm you run, this function will visualize a boxplot for the selected options
 def visualize_boxplot(algos, output_file_box, label):
     plt.figure(figsize=(6, 5))
     colors = ['blue', 'green', 'yellow', 'black', 'brown', 'purple']
 
+    # extracts the k-values and saves it
     all_k_values = []
     for i, algoRunner in enumerate(algos):
-        # Stores all the seperate runs
         box_data = algoRunner.algo_samples
-
         k_values = []
 
         # Extracts the k_values for each run
         for j in range(len(box_data)):
             k = box_data[j].get_k()
-            print(k)
             k_values.append(k)
 
         all_k_values.append(k_values)
 
-    # Saves the boxplot
+    # plots the boxplot
     box = plt.boxplot(all_k_values, patch_artist=True)
 
+    # sets the colors for the different boxplots
     for i, patch in enumerate(box['boxes']):
         patch.set_facecolor(colors[i])
 
+    # styling the labels and saving the graph
     if len(all_k_values) > 1:
         plt.xticks(list(range(1, len(all_k_values) + 1)), label[:-1])
     else:

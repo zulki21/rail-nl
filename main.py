@@ -7,7 +7,7 @@ from code.algorithmRunner.algorunner import AlgoRunner
 
 
 if __name__ in '__main__':
-
+    # required options to run the main
     parser = argparse.ArgumentParser(description='RailNL')
     parser.add_argument('region', type=int, choices=[
                         1, 2], help='Holland ,National')
@@ -27,6 +27,7 @@ if __name__ in '__main__':
 
     stations = load_stations(args.region)
 
+    # conditional argument for choosing algorithm number 5: All Algorithms
     algos = []
     if args.algo == 5:
         algos.append(AlgoRunner(
@@ -54,6 +55,7 @@ if __name__ in '__main__':
         2: 'Nationaal'
     }
 
+    # using the created dictionaries to write the different files to different output names and locations
     output_file_hist = f'plots/histograms/histogram_{algo_names[args.algo]}_{region_names[args.region]}.png'
     output_file_box = f'plots/boxplots/boxplot_{algo_names[args.algo]}_{region_names[args.region]}.png'
     title = f'{algo_names[args.algo]} Algorithm {region_names[args.region]}'
@@ -63,6 +65,7 @@ if __name__ in '__main__':
     if args.algo == 5:
         label = list(algo_names.values())
 
+    # visualizing the graphs
     visualize_histogram(algos, output_file_hist, title, label)
     visualize_boxplot(algos, output_file_box, label)
     create_tabel(algos)
@@ -73,9 +76,11 @@ if __name__ in '__main__':
     best = list(algos[0].max_K().keys())[0]
     trains = best.get_trains()
 
+    # visualizing the plot
     get_all_stations(stations)
     visualize_all_routes(trains, stations)
 
+    # creating an output
     with open(output_csv, 'w') as f:
 
         writer = csv.writer(f)
