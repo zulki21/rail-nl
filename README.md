@@ -43,7 +43,7 @@ The random algoritm chooses a random number of trains between 1,7 and 1,20 given
 
 ### Greedy algorithm
 
-korte uitleg
+The greedy algorithm choses the route of the train based on the k value. It starts off by chosing a random starting station which has unused connections. Then when the train needs to make a choice of which connection to take, it first calculates the effect each one has on the k value. It then uses the connection which gives the highest k value.
 
 ### Hillclimber algorithm
 
