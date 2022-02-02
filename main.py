@@ -76,15 +76,6 @@ if __name__ in '__main__':
     if args.algo == 5:
         label = list(algo_names.values())
 
-    #     output_file_hist = 'plots/histograms/histogram_Comparison_Holland.png'
-    #     output_file_box = 'plots/boxplots/boxplot_Comparison_Holland.png'
-    #     combine_boxplots(all_algos, output_file_box)
-
-    # elif args.region == 2 and args.algo == 5:
-    #     output_file_hist = 'plots/histograms/histogram_Comparison_Nationaal.png'
-    #     output_file_box = 'plots/boxplots/boxplot_Comparison_Nationaal.png'
-    #     combine_boxplots(all_algos, output_file_box)
-
     visualize_histogram(algos, output_file_hist, title, label)
     visualize_boxplot(algos, output_file_box, label)
     create_tabel(algos)
