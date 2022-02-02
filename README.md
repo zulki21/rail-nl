@@ -90,30 +90,38 @@ The structure of the files are as follows, there are 4 main folders `code`, `dat
 ### Usage
 
 To get started right away, run the following commands
+Here is a demo:
 
-<img src="/data/video_verbeterd.gif" width="100%" height="50%"/>
+<img src="/data/data/demo.gif" width="100%" height="50%"/>
 
 The main file you have to call is main.py. The file takes 4 arguments
+
 ```
 python main.py
 ```
+
 The file takes 4 arguments. The first argument is either 1 or 2. 1 being Holland and 2 Nationaal. This command refers to the map you want to use the script on.
+
 ```
-python main.py {1,2} 
+python main.py {1,2}
 ```
 
 The second argument is either 1,2,3,4 or 5. 1 being the random algorithm. 2 being the greedy algorithm. 3 Hillclimber algorithm and 4 is the alternative hillclimber algoritmh which uses greedy. 5 is running all algorithms.
 
 ```
-python main.py {1,2} {1,2,3,4,5} 
+python main.py {1,2} {1,2,3,4,5}
 ```
+
 The third argument wants you to specify a sample size. We recommend not going higher than a 1000 for the hillclimber algorithms.
+
 ```
-python main.py {1,2} {1,2,3,4,5} 500 
+python main.py {1,2} {1,2,3,4,5} 500
 ```
+
 The fourth argument will specify the upper bound of mistakes for the hillclimber algorithm. In case of other algoritms plug in whatever you want. We recommend not going higher than 2000, our research showed a convergence around 750.
+
 ```
-python main.py {1,2} {1,2,3,4,5} 500 750 
+python main.py {1,2} {1,2,3,4,5} 500 750
 ```
 
 This command will provide you with some data of the best k, plots and graphs of the distributions of the desired algorithms depending on the options that you have specified. These can be found in `output_files` and `plots` folders. Refer to the structure header for more info.
