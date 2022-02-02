@@ -4,6 +4,43 @@ RailNL consists of a problem which we as BetereNS try to solve.
 
 ## Getting Started
 
+The most important goal for this case is to design an optimized route for intercitytrains.
+This case consists (out) of two parts.
+
+### Part one - North- and South-Holland
+
+In part one the assignment is to optimize the quality of the routes (north- and south-Holland only) by adhering to a number of restrictions. These restrictions are:
+
+- a maximum number of 7 routes
+- a timeframe of 2 hours
+- all connections must be ridden
+
+To improve the quality of the routes we will use this formula:
+
+```
+K = p*10000 - (T*100 + Min)
+K = quality of the routes
+p = fraction of the ridden connections (between 0 and 1)
+T = number of routes
+Min = number of minutes
+```
+
+### Part two - The Netherlands
+
+The goal of the second part of the case remains the same. The same formula will be used to optimize the K-value of the routes. Because we are using all the stations and connections from the Netherlands, the restrictions are a bit different:
+
+- a maximum number of 20 routes
+- a timeframe of 3 hours
+- all connections must be ridden
+
+### Examples
+
+Three examples of generated output could be a plot, a graph, a csv-file.
+These examples are shown below:
+<img src="data/visualisatie random algorithm.png" width="20%" height="50%"/>
+<img src="data/boxplot-greedy.svgdata/boxplot-greedy.svg" width="20%" height="50%"/>
+<img src="output_files/Hillclimber_Holland.csv" width="20%" height="50%"/>
+
 ### Prerequisites
 
 To run the following code some dependencies are needed these can be found in `requirements.txt`. They can be installed using the following command:
@@ -45,6 +82,24 @@ python main.py
 ```
 python main.py 1 1 2 3
 ```
+
+## Used Algorithms
+
+### Random algorithm
+
+korte uitleg
+
+### Greedy algorithm
+
+korte uitleg
+
+### Hillclimber algorithm
+
+korte uitleg
+
+### Hillclimber-alt algorithm
+
+korte uitleg
 
 ## Authors
 
