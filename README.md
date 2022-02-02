@@ -34,8 +34,9 @@ The structure of the files are as follows there are 4 main folders `code`, `data
 ### Usage
 
 To get started right away using the
-<img src="/data/video.gif" width="100%" height="50%"/>
-<img src="/data/Demo.mp4" width="100%" height="50%"/>
+
+<!-- <img src="/data/video.gif" width="100%" height="50%"/> -->
+<img src="/data/video_verbeterd.gif" width="100%" height="50%"/>
 
 ```
 python main.py
