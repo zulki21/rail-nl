@@ -39,7 +39,7 @@ In this case, we have used 4 different algorithms. The goal for using these algo
 
 ### Random algorithm
 
-korte uitleg
+The random algoritm chooses a random number of trains between 1,7 and 1,20 given the different maps. All of these trains will have a random starting station from where they will start their random path up untill they reach the time limit.
 
 ### Greedy algorithm
 
@@ -47,11 +47,11 @@ korte uitleg
 
 ### Hillclimber algorithm
 
-korte uitleg
+The hillclimber algorithm will start with a random state space created by the random algorithm then it will remove 3 trains and start adding new random trains. After comparing the k-values the algorithm will decide whether or not to use the new trains of revert back to the original ones. The user has to specify a bound on how many times the algorithm is allowed to get a lower k-value then the best one. After this bound is hit the algorithm will stop. Our research has found that the k-value converges around 1000 iterations.
 
-### Hillclimber-alt algorithm
+### Hillclimber-greedy algorithm
 
-korte uitleg
+This algorithm is a variation of the standard hillclimber algorithm it is very similar to the steepest ascent Hillclimbing algorithm. The main difference between the two algorithms is that the small change which is made is not random but decided using the greedy algorithm. This algorithm allows for more local optimization of the problem.
 
 ### Output examples
 
@@ -119,4 +119,8 @@ This command will provide you with some tabels, plots and graphs depending on th
 
 ## Easter egg
 
-try running the command sl in the terminal ☺
+```
+sudo apt install sl
+```
+
+try installing this command and then running 'sl' in the terminal ☺
