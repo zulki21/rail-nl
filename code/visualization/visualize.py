@@ -85,9 +85,9 @@ def visualize_all_routes(trains, stations):
 def visualize_histogram(algos, output_file_hist, title, label):
     plt.figure(figsize=(6, 5))
 
-    for algoRunner in algos:
+    for algo_runner in algos:
         # Plot histogram
-        plt.hist(algoRunner.histogram(), bins='auto')
+        plt.hist(algo_runner.histogram(), bins='auto')
 
     # Labels for the histogram
     plt.xlabel("K-values")
@@ -101,8 +101,8 @@ def visualize_histogram(algos, output_file_hist, title, label):
 # no matter which algorithm you run, this function will visualize a tabel for the selected options
 # this tabel will be printed in the terminal
 def create_tabel(algos):
-    for algoRunner in algos:
-        content = algoRunner.stats().items()
+    for algo_runner in algos:
+        content = algo_runner.stats().items()
         print(tabulate(content, tablefmt="github"))
 
 
@@ -113,8 +113,8 @@ def visualize_boxplot(algos, output_file_box, label):
 
     # extracts the k-values and saves it
     all_k_values = []
-    for i, algoRunner in enumerate(algos):
-        box_data = algoRunner.algo_samples
+    for i, algo_runner in enumerate(algos):
+        box_data = algo_runner.algo_samples
         k_values = []
 
         # Extracts the k_values for each run
