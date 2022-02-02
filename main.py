@@ -1,22 +1,9 @@
 from code.mainCode.loader import load_stations
-from code.mainCode.connection import Train
-import random
 import csv
-import numpy as np
-import matplotlib.pyplot as plt
 import argparse
-from code.algorithmRunner.hillclimberrunner import AlgoRunnerHill
-from code.algorithms.greedyalgo import GreedyAlgo
 from code.visualization.visualize import visualize_histogram, visualize_boxplot, create_tabel
-
-
-from code.visualization.visualize import *
+from code.visualization.visualize import get_all_stations, visualize_all_routes
 from code.algorithmRunner.algorunner import AlgoRunner
-from code.algorithms.randomalgo import RandomAlgo
-from code.algorithmRunner.greedyrunner import GreedyRunner
-
-
-# def main(area, duration, lines, algorithm):
 
 
 if __name__ in '__main__':
