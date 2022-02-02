@@ -1,4 +1,3 @@
-from pyrsistent import b
 from code.algorithms.randomalgo import RandomAlgo
 from code.mainCode.connection import Train
 import random

@@ -71,7 +71,7 @@ def total_time_trains(trains):
     ----------
     trains: list of train objects
 
-    Returns   
+    Returns
     ------
     int
         time in mintues
@@ -120,7 +120,7 @@ class RandomAlgo:
     stations : dict of station objects
         dictionary containing station names and the object
     trains: list
-        list containing train objects 
+        list containing train objects
     used_connections : list of sets
         list which keeps track of used connections
     all_connections : list of sets
@@ -139,6 +139,7 @@ class RandomAlgo:
     get_trains()
         returns trains in a given model
     """
+
     def __init__(self, region) -> None:
         self.region = region
         self.stations = load_stations(self.region)
@@ -159,7 +160,7 @@ class RandomAlgo:
         # creates object with all connections
         for station in self.stations.values():
             for connection in list(station.connections.keys()):
-                if check_if_contains(self.all_connections, {station, connection}) == False:
+                if not check_if_contains(self.all_connections, {station, connection}):
                     self.all_connections.append({station, connection})
 
         # adding random amount of trains
@@ -176,9 +177,9 @@ class RandomAlgo:
                 connections = list(current_station.get_connections().keys())
                 potential_connections = []
 
-                # prefer non used stations over stations which are not used 
+                # prefer non used stations over stations which are not used
                 for next_station in connections:
-                    if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                    if not check_if_contains(self.used_connections, {current_station, next_station}):
                         potential_connections.append(next_station)
 
                 if len(potential_connections) != 0:
@@ -189,9 +190,7 @@ class RandomAlgo:
                 if train.get_time_route() + current_station.get_time(next_station) > self.max_time:
                     break
                 train.add_station(next_station)
-
-
-                if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                if not check_if_contains(self.used_connections, {current_station, next_station}):
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station
@@ -216,7 +215,7 @@ class RandomAlgo:
                 potential_connections = []
 
                 for next_station in connections:
-                    if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                    if not check_if_contains(self.used_connections, {current_station, next_station}):
                         potential_connections.append(next_station)
 
                 if len(potential_connections) != 0:
@@ -229,11 +228,11 @@ class RandomAlgo:
                     break
 
                 train.add_station(next_station)
-                if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                if not check_if_contains(self.used_connections, {current_station, next_station}):
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station
-            
+
             # check if all connections are used
             first_tuple_list = [tuple(lst) for lst in self.all_connections]
             secnd_tuple_list = [tuple(lst) for lst in self.used_connections]

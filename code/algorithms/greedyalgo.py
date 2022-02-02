@@ -1,8 +1,6 @@
-from tabnanny import check
 from code.mainCode.loader import load_stations
 import random
 from code.mainCode.connection import Train
-
 
 
 def k_value(trains, used_connections, minutes, region):
@@ -33,7 +31,7 @@ def total_time_trains(trains):
 
 
 class GreedyAlgo:
-    
+
     def __init__(self, region):
         """
         This function runs a greedy algorithm, for every step the train takes it calculates the best
