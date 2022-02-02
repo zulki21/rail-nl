@@ -40,81 +40,63 @@ if __name__ in '__main__':
 
     stations = load_stations(args.region)
 
+    algos = []
     if args.algo == 5:
-        all_algos = []
-        all_algos.append(AlgoRunner(
+        algos.append(AlgoRunner(
             1, args.sample_size, args.region, args.bound_climber))
-        all_algos.append(AlgoRunner(
+        algos.append(AlgoRunner(
             2, args.sample_size, args.region, args.bound_climber))
-        all_algos.append(AlgoRunner(
+        algos.append(AlgoRunner(
             3, args.sample_size, args.region, args.bound_climber))
-        all_algos.append(AlgoRunner(
+        algos.append(AlgoRunner(
             4, args.sample_size, args.region, args.bound_climber))
     else:
-        list_of_algos = AlgoRunner(
-            args.algo, args.sample_size, args.region, args.bound_climber)
+        algos.append(AlgoRunner(
+            args.algo, args.sample_size, args.region, args.bound_climber))
 
-    if args.region == 1 and args.algo == 1:
-        output_file_hist = 'plots/histograms/histogram_Random_Holland.png'
-        output_file_box = 'plots/boxplots/boxplot_Random_Holland.png'
-        output_csv = 'output_files/Random_Holland.csv'
+    algo_names = {
+        1: 'Random',
+        2: 'Greedy',
+        3: 'Hillclimber',
+        4: 'Hillclimber_alt',
+        5: 'Comparison'
+    }
 
-    elif args.region == 2 and args.algo == 1:
-        output_file_hist = 'plots/histograms/histogram_Random_Nationaal.png'
-        output_file_box = 'plots/boxplots/boxplot_Random_Nationaal.png'
-        output_csv = 'output_files/Random_Nationaal.csv'
+    region_names = {
+        1: 'Holland',
+        2: 'Nationaal'
+    }
 
-    elif args.region == 1 and args.algo == 2:
-        output_file_hist = 'plots/histograms/histogram_Greedy_Holland.png'
-        output_file_box = 'plots/boxplots/boxplot_Greedy_Holland.png'
-        output_csv = 'output_files/Greedy_Holland.csv'
+    output_file_hist = f'plots/histograms/histogram_{algo_names[args.algo]}_{region_names[args.region]}.png'
+    output_file_box = f'plots/boxplots/boxplot_{algo_names[args.algo]}_{region_names[args.region]}.png'
+    title = f'{algo_names[args.algo]} Algorithm {region_names[args.region]}'
+    label = [f'{algo_names[args.algo]}-{region_names[args.region]}']
+    output_csv = f'output_files/{algo_names[args.algo]}_{region_names[args.region]}.csv'
 
-    elif args.region == 2 and args.algo == 2:
-        output_file_hist = 'plots/histograms/histogram_Greedy_Nationaal.png'
-        output_file_box = 'plots/boxplots/boxplot_Greedy_Nationaal.png'
-        output_csv = 'output_files/Greedy_Nationaal.csv'
+    if args.algo == 5:
+        label = list(algo_names.values())
 
-    elif args.region == 1 and args.algo == 3:
-        output_file_hist = 'plots/histograms/histogram_Hillclimber_Holland.png'
-        output_file_box = 'plots/boxplots/boxplot_Hillclimber_Holland.png'
-        output_csv = 'output_files/Hillclimber_Holland.csv'
+    #     output_file_hist = 'plots/histograms/histogram_Comparison_Holland.png'
+    #     output_file_box = 'plots/boxplots/boxplot_Comparison_Holland.png'
+    #     combine_boxplots(all_algos, output_file_box)
 
-    elif args.region == 2 and args.algo == 3:
-        output_file_hist = 'plots/histograms/histogram_Hillclimber_Nationaal.png'
-        output_file_box = 'plots/boxplots/boxplot_Hillclimber_Nationaal.png'
-        output_csv = 'output_files/Hillclimber_Nationaal.csv'
+    # elif args.region == 2 and args.algo == 5:
+    #     output_file_hist = 'plots/histograms/histogram_Comparison_Nationaal.png'
+    #     output_file_box = 'plots/boxplots/boxplot_Comparison_Nationaal.png'
+    #     combine_boxplots(all_algos, output_file_box)
 
-    elif args.region == 1 and args.algo == 4:
-        output_file_hist = 'plots/histograms/histogram_Hillclimber-alt_Holland.png'
-        output_file_box = 'plots/boxplots/boxplot_Hillclimber-alt_Holland.png'
-        output_csv = 'output_files/Hillclimber-alt_Holland.csv'
+    visualize_histogram(algos, output_file_hist, title, label)
+    visualize_boxplot(algos, output_file_box, label)
+    create_tabel(algos)
 
-    elif args.region == 2 and args.algo == 4:
-        output_file_hist = 'plots/histograms/histogram_Hillclimber-alt_Nationaal.png'
-        output_file_box = 'plots/boxplots/boxplot_Hillclimber-alt_Nationaal.png'
-        output_csv = 'output_files/Hillclimber-alt_Nationaal.csv'
+    if args.algo == 5:
+        exit()
 
-    elif args.region == 1 and args.algo == 5:
-        output_file_hist = 'plots/histograms/histogram_Comparison_Holland.png'
-        output_file_box = 'plots/boxplots/boxplot_Comparison_Holland.png'
-        visualize_histogram(all_algos, output_file_hist)
-        visualize_boxplot(all_algos, output_file_box)
-
-    elif args.region == 2 and args.algo == 5:
-        output_file_hist = 'plots/histograms/histogram_Comparison_Nationaal.png'
-        output_file_box = 'plots/boxplots/boxplot_Comparison_Nationaal.png'
-        visualize_histogram(all_algos, output_file_hist)
-        visualize_boxplot(all_algos, output_file_box)
-
-    # visualize_histogram(list_of_algos, output_file_hist)
-    # visualize_boxplot(list_of_algos, output_file_box)
-    # create_tabel(list_of_algos)
-
-    # get_all_stations(stations)
-    # visualize_all_routes(trains, stations)
-
-    best = list(list_of_algos.max_K().keys())[0]
+    best = list(algos[0].max_K().keys())[0]
     trains = best.get_trains()
+
+    get_all_stations(stations)
+    visualize_all_routes(trains, stations)
 
     with open(output_csv, 'w') as f:
 

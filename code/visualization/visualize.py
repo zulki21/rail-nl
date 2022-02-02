@@ -83,72 +83,56 @@ def visualize_all_routes(trains, stations):
     fig.show()
 
 
-def visualize_histogram(list_of_algos, output_file_hist):
+def visualize_histogram(algos, output_file_hist, title, label):
+    plt.figure(figsize=(6, 5))
 
-    runs = list_of_algos
-    # Plot histogram
-    plt.hist(runs.histogram(), bins='auto')
+    for algoRunner in algos:
+        # Plot histogram
+        plt.hist(algoRunner.histogram(), bins='auto')
 
     # Labels for the histogram
     plt.xlabel("K-values")
     plt.ylabel("Frequency")
-    plt.title('Random Algorithm')
-    # plt.legend(['Greedy', 'Random'])
-
-    # Save histogram as a png
+    plt.title(title)
+    plt.legend(label)
 
     plt.savefig(output_file_hist)
 
 
-def create_tabel(list_of_algos):
-
-    RandomTabelRuns = list_of_algos
-    content = RandomTabelRuns.stats().items()
-    print(content)
-    print(tabulate(content, tablefmt="github"))
+def create_tabel(algos):
+    for algoRunner in algos:
+        content = algoRunner.stats().items()
+        print(tabulate(content, tablefmt="github"))
 
 
-def visualize_boxplot(list_of_algos, output_file_box):
-    # Runs the random algorithm
+def visualize_boxplot(algos, output_file_box, label):
+    plt.figure(figsize=(6, 5))
+    colors = ['blue', 'green', 'yellow', 'black', 'brown', 'purple']
 
-    runs = list_of_algos
+    all_k_values = []
+    for i, algoRunner in enumerate(algos):
+        # Stores all the seperate runs
+        box_data = algoRunner.algo_samples
 
-    # Stores all the seperate runs
-    box_data = runs.algo_samples
+        k_values = []
 
-    k_values = []
+        # Extracts the k_values for each run
+        for j in range(len(box_data)):
+            k = box_data[j].get_k()
+            print(k)
+            k_values.append(k)
 
-    # Extracts the k_values for each run
-    for i in range(len(box_data)):
+        all_k_values.append(k_values)
 
-        k = box_data[i].get_k()
-        print(k)
-        k_values.append(k)
+    # Saves the boxplot
+    box = plt.boxplot(all_k_values, patch_artist=True)
 
-    # Saves the boxplot (More plots will be added with more algorithms)
-    plt.boxplot(k_values, patch_artist=True, labels=['random'])
-    plt.ylabel('k-values')
-    plt.savefig(output_file_box, format="png")
+    for i, patch in enumerate(box['boxes']):
+        patch.set_facecolor(colors[i])
 
-
-def combine_boxplots(all_algos, output_file_box):
-    # Runs the random algorithm
-
-    runs = all_algos
-
-    # Stores all the seperate runs
-    box_data = runs.algo_samples
-
-    k_values = []
-
-    # Extracts the k_values for each run
-    for i in range(len(box_data)):
-
-        k = box_data[i].get_k()
-        print(k)
-        k_values.append(k)
-
-    # Saves the boxplot (More plots will be added with more algorithms)
-    plt.boxplot(k_values, patch_artist=True, labels=['random'])
+    if len(all_k_values) > 1:
+        plt.xticks(list(range(1, len(all_k_values) + 1)), label[:-1])
+    else:
+        plt.xticks([1], label)
     plt.ylabel('k-values')
     plt.savefig(output_file_box, format="png")
