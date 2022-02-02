@@ -102,5 +102,5 @@ if __name__ in '__main__':
             writer.writerow(train_route)
             train_number += 1
 
-        score = [f'SCORE = {best_k}']
+        score = [f'SCORE = {best_k[0]}']
         writer.writerow(score)
