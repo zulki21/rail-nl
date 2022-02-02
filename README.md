@@ -1,21 +1,21 @@
 # RailNL
 
-RailNL consists of a problem which we as BetereNS try to solve.
+RailNL consisted of a problem which we as BetereNS tried to solve.
 
 ## Getting Started
 
-The most important goal for this case is to design an optimized route for intercitytrains.
-This case consists (out) of two parts.
+The most important goal for this case was to design an optimized route for intercitytrains.
+This case consisted of two parts.
 
 ### Part one (North- and South-Holland)
 
-In part one the assignment is to optimize the quality of the routes of north- and south-Holland by adhering to a number of restrictions. These restrictions are:
+In part one the assignment was to optimize the quality of the routes of north- and south-Holland by adhering to a number of restrictions. These restrictions were:
 
 - a maximum number of 7 routes
 - a timeframe of 2 hours
 - all connections must be ridden
 
-To improve the quality of the routes we will use this formula:
+To improve the quality of the routes we used the following formula:
 
 ```
 K = p*10000 - (T*100 + Min)
@@ -27,7 +27,7 @@ Min = number of minutes
 
 ### Part two The Netherlands
 
-The goal of the second part of the case remains the same. The same formula will be used to optimize the K-value of the routes. Because we are using all the stations and connections from the Netherlands, the restrictions are a bit different:
+The goal of the second part of the case remained the same. The same formula was used to optimize the K-value of the routes.The restrictions in this part were different as all stations were used as opposed to the routes in only two provinces:
 
 - a maximum number of 20 routes
 - a timeframe of 3 hours
@@ -35,7 +35,7 @@ The goal of the second part of the case remains the same. The same formula will 
 
 ## Used Algorithms
 
-In this case, we have used 4 different algorithms. The goal for using these algorithms is to optimize the k-value of the routes. The higher the k-value, the better and the more optimized the routes are.
+In this case, we used 4 different algorithms. The goal for using these algorithms was to optimize the k-value of the routes. The higher the k-value, the better and the more optimized the routes were.
 
 ### Random algorithm
 
@@ -63,7 +63,7 @@ These examples are shown below:
 
 ### Prerequisites
 
-To run the following code some dependencies are needed these can be found in `requirements.txt`. They can be installed using the following command:
+To run the following code some dependencies are needed. These can be found in `requirements.txt`. They can be installed using the following command:
 
 ```
 pip install -r requirements.txt
@@ -71,7 +71,7 @@ pip install -r requirements.txt
 
 ### Structure
 
-The structure of the files are as follows there are 4 main folders `code`, `data`, `output_files` and `plots`. `code` contains all the code we have written. `data` contains the data used in the research. `output_files` contains raw csv files of the best samples we have found. `plots` contains different graphs which show more insight into how different algorithms behave and compare to each other. In the tree below you can find some more information about every subfolder. Furthermore we have some files in the root which are `main.py` containing the script to run the function according to the users needs.
+The structure of the files are as follows, there are 4 main folders `code`, `data`, `output_files` and `plots`. `code` contains all written codes. `data` contains the data used in the research. `output_files` contains raw csv files of the best samples we have found. `plots` contains different graphs which provides insight into how different algorithms behave and compare to each other. In the tree below you can find some more information about the subfolders. Furthermore the root directory contains `main.py` which is necessary to run the function according to the users needs.
 
 ```bash
 .
@@ -90,7 +90,7 @@ The structure of the files are as follows there are 4 main folders `code`, `data
 
 ### Usage
 
-To get started right away using the
+To get started right away, run the following commands
 
 <!-- <img src="/data/video.gif" width="100%" height="50%"/> -->
 <img src="/data/video_verbeterd.gif" width="100%" height="50%"/>
