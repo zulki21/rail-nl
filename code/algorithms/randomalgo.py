@@ -64,6 +64,18 @@ def unique_total_connections(list_of_trains):
 
 
 def total_time_trains(trains):
+    """
+    returns total time of all the trains
+
+    Parameters
+    ----------
+    trains: list of train objects
+
+    Returns   
+    ------
+    int
+        time in mintues
+    """
     min = 0
     for train in trains:
         min += train.get_time_route()
@@ -72,6 +84,20 @@ def total_time_trains(trains):
 
 
 def check_if_contains(all_connections, set):
+    """
+    checks if a particular connections exist in a list of connections
+
+    Parameters
+    ----------
+    all_connections: list of sets
+        a list of sets containing all connections as sets of 2 stations
+    set: set
+        a set containing 2 station objects
+    Returns
+    ------
+    boolean
+        returns true or false
+    """
     if len(all_connections) == 0:
         return False
     else:
@@ -82,6 +108,37 @@ def check_if_contains(all_connections, set):
 
 
 class RandomAlgo:
+    """
+    A class used to represent a Station
+
+    ...
+
+    Attributes
+    ----------
+    region : int
+        a integer which represent 2 regions Holland or Nationaal
+    stations : dict of station objects
+        dictionary containing station names and the object
+    trains: list
+        list containing train objects 
+    used_connections : list of sets
+        list which keeps track of used connections
+    all_connections : list of sets
+        list with all connections
+    max_time: int
+        integer which keeps track of maximum time a train may use
+    max_trains : int
+        maximum amount of trains total model can use
+
+    Methods
+    -------
+    reset()
+        reinitializes object if it doesn't give desired outcome needed for lower bias
+    get_k()
+        returns k of a given model
+    get_trains()
+        returns trains in a given model
+    """
     def __init__(self, region) -> None:
         self.region = region
         self.stations = load_stations(self.region)
@@ -89,6 +146,7 @@ class RandomAlgo:
         self.used_connections = []
         self.all_connections = []
 
+        # check which map has been used and change magic numbers to desired ones
         if self.region == 1:
             self.number_connection = 28
             self.max_time = 120
@@ -104,12 +162,13 @@ class RandomAlgo:
                 if check_if_contains(self.all_connections, {station, connection}) == False:
                     self.all_connections.append({station, connection})
 
-        # adding routes to the trains randomly
+        # adding random amount of trains
         for i in range(random.randint(0, self.max_trains - 1)):
             starting_station = random.choice(list(self.stations.values()))
 
             self.trains.append(Train(starting_station))
 
+        # start adding routes to trains
         for train in self.trains:
             current_station = train.get_route()[0]
             while train.get_time_route() <= self.max_time:
@@ -117,6 +176,7 @@ class RandomAlgo:
                 connections = list(current_station.get_connections().keys())
                 potential_connections = []
 
+                # prefer non used stations over stations which are not used 
                 for next_station in connections:
                     if check_if_contains(self.used_connections, {current_station, next_station}) == False:
                         potential_connections.append(next_station)
@@ -129,11 +189,14 @@ class RandomAlgo:
                 if train.get_time_route() + current_station.get_time(next_station) > self.max_time:
                     break
                 train.add_station(next_station)
+
+
                 if check_if_contains(self.used_connections, {current_station, next_station}) == False:
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station
 
+        # check if all connections are used
         first_tuple_list = [tuple(lst) for lst in self.all_connections]
         secnd_tuple_list = [tuple(lst) for lst in self.used_connections]
 
@@ -141,6 +204,7 @@ class RandomAlgo:
         secnd_set = set(secnd_tuple_list)
         diff = first_set.symmetric_difference(secnd_set)
 
+        # keep adding trains till we have used all connections
         while len(diff) > 0 and len(self.trains) < self.max_trains:
             starting_station = random.sample(diff, 1)[0][0]
             self.trains.append(Train(starting_station))
@@ -160,6 +224,7 @@ class RandomAlgo:
                 else:
                     next_station = random.choice(connections)
 
+                # if time of train goes over desired max time stop adding to route
                 if train.get_time_route() + current_station.get_time(next_station) > 180:
                     break
 
@@ -168,7 +233,8 @@ class RandomAlgo:
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station
-
+            
+            # check if all connections are used
             first_tuple_list = [tuple(lst) for lst in self.all_connections]
             secnd_tuple_list = [tuple(lst) for lst in self.used_connections]
 
@@ -176,14 +242,25 @@ class RandomAlgo:
             secnd_set = set(secnd_tuple_list)
             diff = first_set.symmetric_difference(secnd_set)
 
+            # if not all connections are used start proccess again
             if len(self.used_connections) != self.number_connection:
                 self.reset()
 
     def reset(self):
+        """
+        reruns the object
+        """
         self.__init__(self.region)
 
     def get_k(self):
-        # calculate k value of the given random run
+        """
+        returns K
+
+        Returns
+        -------
+        int
+            K-value
+        """
         a = unique_total_connections(self.trains)
 
         min = total_time_trains(self.trains)
@@ -193,4 +270,12 @@ class RandomAlgo:
         return K
 
     def get_trains(self):
+        """
+        returns list of trains
+
+        Returns
+        -------
+        list
+            list of train objects
+        """
         return self.trains
