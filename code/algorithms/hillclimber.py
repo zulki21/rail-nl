@@ -48,9 +48,8 @@ def check_if_contains(all_connections, set):
 
 
 class Hillclimber:
-    def __init__(self, region, reset_bound) -> None:
-        """
-        A class used to represent a Station
+    """
+        A class which contains a single run of the hillclimber algorithm
 
         ...
 
@@ -87,6 +86,8 @@ class Hillclimber:
         get_trains()
             returns list of trains
         """
+    def __init__(self, region, reset_bound) -> None:
+        
 
         a = RandomAlgo(region)
         self.region = region
