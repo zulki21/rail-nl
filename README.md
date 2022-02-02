@@ -38,11 +38,9 @@ The goal of the second part of the case remains the same. The same formula will 
 Three examples of generated output could be a plot, a graph, a tabel.
 These examples are shown below:
 
-<p float="left">
-    <img src="data/visualisatie random algorithm.png" width="100"/>
-    <img src="data/Histogram.png" width="100"/>
-    <img src="data/tabel greedy.png" width="100"/>
-</p>
+<img src="data/visualisatie random algorithm.png" width="20%" height="50%"/>
+<img src="data/Histogram.png" width="30%" height="30%"/>
+<img src="data/tabel greedy.png" width="30%" height="40%"/>
 
 ### Prerequisites
 
