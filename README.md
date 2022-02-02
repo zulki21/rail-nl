@@ -25,7 +25,7 @@ T = number of routes
 Min = number of minutes
 ```
 
-### Part two - The Netherlands
+### Part two The Netherlands
 
 The goal of the second part of the case remains the same. The same formula will be used to optimize the K-value of the routes. Because we are using all the stations and connections from the Netherlands, the restrictions are a bit different:
 
