@@ -101,7 +101,7 @@ class RandomAlgo:
         # creates object with all connections
         for station in self.stations.values():
             for connection in list(station.connections.keys()):
-                if check_if_contains(self.all_connections, {station, connection}) == False:
+                if not check_if_contains(self.all_connections, {station, connection}):
                     self.all_connections.append({station, connection})
 
         # adding routes to the trains randomly
@@ -118,7 +118,7 @@ class RandomAlgo:
                 potential_connections = []
 
                 for next_station in connections:
-                    if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                    if not check_if_contains(self.used_connections, {current_station, next_station}):
                         potential_connections.append(next_station)
 
                 if len(potential_connections) != 0:
@@ -129,7 +129,7 @@ class RandomAlgo:
                 if train.get_time_route() + current_station.get_time(next_station) > self.max_time:
                     break
                 train.add_station(next_station)
-                if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                if not check_if_contains(self.used_connections, {current_station, next_station}):
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station
@@ -152,7 +152,7 @@ class RandomAlgo:
                 potential_connections = []
 
                 for next_station in connections:
-                    if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                    if not check_if_contains(self.used_connections, {current_station, next_station}):
                         potential_connections.append(next_station)
 
                 if len(potential_connections) != 0:
@@ -164,7 +164,7 @@ class RandomAlgo:
                     break
 
                 train.add_station(next_station)
-                if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                if not check_if_contains(self.used_connections, {current_station, next_station}):
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station

@@ -122,7 +122,7 @@ class Hillclimber:
                 potential_connections = []
 
                 for next_station in connections:
-                    if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                    if not check_if_contains(self.used_connections, {current_station, next_station}):
                         potential_connections.append(next_station)
 
                 if len(potential_connections) != 0:
@@ -134,7 +134,7 @@ class Hillclimber:
                     break
 
                 train.add_station(next_station)
-                if check_if_contains(self.used_connections, {current_station, next_station}) == False:
+                if not check_if_contains(self.used_connections, {current_station, next_station}):
                     self.used_connections.append(
                         {current_station, next_station})
                 current_station = next_station
