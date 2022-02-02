@@ -91,7 +91,6 @@ The structure of the files are as follows, there are 4 main folders `code`, `dat
 
 To get started right away, run the following commands
 
-<!-- <img src="/data/video.gif" width="100%" height="50%"/> -->
 <img src="/data/video_verbeterd.gif" width="100%" height="50%"/>
 
 ```
