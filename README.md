@@ -105,7 +105,7 @@ korte uitleg
 
 - Zulkarneyn Catak
 - Adrian Ruessink
-- Robert Youseff
+- Robert Youssef
 
 ## Acknowledgments
 
