@@ -65,6 +65,14 @@ class AlgoRunner:
                 n_runs += 1
 
     def max_K(self):
+        """
+        returns maximum K value and its object
+
+        Returns
+        -------
+        dict
+            key is the algo object and value is the max k value
+        """
         k_max = -10000
         best_algo = None
 
@@ -77,6 +85,14 @@ class AlgoRunner:
 
     # function which returns mean median modus of dataset
     def stats(self):
+        """
+        returns several stats such as mean mode, standard deviation
+
+        Returns
+        -------
+        dict
+            stats as key and corresponding statistics value
+        """
         dataset = []
         for algo in self.algo_samples:
             dataset.append(algo.get_k())
@@ -84,6 +100,14 @@ class AlgoRunner:
         return {"mean": statistics.mean(dataset), "mode": statistics.mode(dataset), "median": statistics.median(dataset), "stdev": statistics.stdev(dataset), "max": max(dataset), "min": min(dataset)}
 
     def histogram(self):
+        """
+        used for creating a histogram 
+
+        Returns
+        -------
+        list
+            list of k values for histogram
+        """
         dataset = []
         for algo in self.algo_samples:
             dataset.append(algo.get_k())
