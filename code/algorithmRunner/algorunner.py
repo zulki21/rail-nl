@@ -10,6 +10,27 @@ sys.setrecursionlimit(10000)
 
 
 class AlgoRunner:
+    """
+    A class used to run the algorithm multiple times and store it's data
+    
+    ...
+
+    Attributes
+    ----------
+    algo_samples: list
+        a list in which we have the results of multiple algorithms
+    N: int
+        Amount of samples we want from a given run
+    Methods
+    -------
+    max_k(station)
+        gives you the algorithm with the maximum k value
+    stats()
+        returns different stats about the algo samples
+    histogram()
+        used for the histogram of the k-values
+    
+    """
     def __init__(self, algorithm, sample_size, region, reset_bound) -> None:
         self.algo_samples = []
         self.N = sample_size
@@ -44,6 +65,14 @@ class AlgoRunner:
                 n_runs += 1
 
     def max_K(self):
+        """
+        returns maximum K value and its object
+
+        Returns
+        -------
+        dict
+            key is the algo object and value is the max k value
+        """
         k_max = -10000
         best_algo = None
 
@@ -56,6 +85,14 @@ class AlgoRunner:
 
     # function which returns mean median modus of dataset
     def stats(self):
+        """
+        returns several stats such as mean mode, standard deviation
+
+        Returns
+        -------
+        dict
+            stats as key and corresponding statistics value
+        """
         dataset = []
         for algo in self.algo_samples:
             dataset.append(algo.get_k())
@@ -64,6 +101,14 @@ class AlgoRunner:
                 "stdev": statistics.stdev(dataset), "max": max(dataset), "min": min(dataset)}
 
     def histogram(self):
+        """
+        used for creating a histogram 
+
+        Returns
+        -------
+        list
+            list of k values for histogram
+        """
         dataset = []
         for algo in self.algo_samples:
             dataset.append(algo.get_k())
