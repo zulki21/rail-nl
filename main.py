@@ -75,6 +75,7 @@ if __name__ in '__main__':
 
     best = list(algos[0].max_K().keys())[0]
     trains = best.get_trains()
+    best_k = list(algos[0].max_K().values())
 
     # visualizing the plot
     get_all_stations(stations)
@@ -101,5 +102,5 @@ if __name__ in '__main__':
             writer.writerow(train_route)
             train_number += 1
 
-        score = [f'SCORE = {best}']
+        score = [f'SCORE = {best_k[0]}']
         writer.writerow(score)
