@@ -1,3 +1,5 @@
+import time
+import subprocess
 from code.algorithms.randomalgo import RandomAlgo
 from code.algorithms.hillclimber import Hillclimber
 from code.algorithms.greedyalgo import GreedyAlgo
@@ -13,25 +15,39 @@ class AlgoRunner:
         self.N = sample_size
 
         if algorithm == 1:
-            for i in range(self.N):
+            # random
+            start = time.time()
+            n_runs = 0
+            while time.time() - start < 3600:
+                print(f"run: {n_runs}")
                 self.algo_samples.append(RandomAlgo(region=region))
-                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
-
+                n_runs += 1
         elif algorithm == 2:
             # greedy
-            for i in range(1, 1 + self.N):
-                self.algo_samples.append(GreedyAlgo(region))
-                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
+            start = time.time()
+            n_runs = 0
+            while time.time() - start < 3600:
+                print(f"run: {n_runs}")
+                self.algo_samples.append(GreedyAlgo(region=region))
+                n_runs += 1
         elif algorithm == 3:
             # hillclimber
-            for i in range(self.N):
-                self.algo_samples.append(Hillclimber(region, reset_bound))
-                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
+            start = time.time()
+            n_runs = 0
+            while time.time() - start < 3600:
+                print(f"run: {n_runs}")
+                self.algo_samples.append(Hillclimber(
+                    region=region, reset_bound=reset_bound))
+                n_runs += 1
         elif algorithm == 4:
             # alternative hillclimber
-            for i in range(self.N):
-                self.algo_samples.append(Hillclimber_alt(region, reset_bound))
-                print(f" {100 * i/self.N} % completed", end="\r",flush=True)
+            start = time.time()
+            n_runs = 0
+            while time.time() - start < 3600:
+                print(f"run: {n_runs}")
+                self.algo_samples.append(Hillclimber_alt(
+                    region=region, reset_bound=reset_bound))
+                n_runs += 1
 
     def max_K(self):
         k_max = -10000
